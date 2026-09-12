@@ -11,6 +11,7 @@ const MODEL_CONFIGS = {
       breakTime: 'break_time', profilePhoto: 'profile_photo', passwordResetToken: 'password_reset_token_hash',
       passwordResetExpiresAt: 'password_reset_expires_at',
     },
+    jsonFields: ['notificationPreferences'],
   },
   pets: {
     table: 'pets',
@@ -82,6 +83,7 @@ const MODEL_CONFIGS = {
       reportType: 'report_type', metrics: 'metrics', trendRows: 'trend_rows', insights: 'insights',
     },
     nullIfEmpty: ['fromDate', 'toDate'],
+    jsonFields: ['metrics', 'trendRows', 'insights'],
   },
   activity_logs: {
     table: 'activity_logs',
@@ -90,6 +92,7 @@ const MODEL_CONFIGS = {
       actorRole: 'actor_role', entityType: 'entity_type', entityId: 'entity_id', entityLabel: 'entity_label', metadata: 'metadata',
     },
     activityLog: true,
+    jsonFields: ['metadata'],
   },
 }
 
@@ -121,6 +124,18 @@ function matches(document, query = {}) {
 function normalizeTime(value) {
   const text = String(value || '')
   return /^\d{2}:\d{2}:\d{2}/.test(text) ? text.slice(0, 5) : text
+}
+
+function normalizeDate(value) {
+  if (value instanceof Date) {
+    return [
+      value.getFullYear(),
+      String(value.getMonth() + 1).padStart(2, '0'),
+      String(value.getDate()).padStart(2, '0'),
+    ].join('-')
+  }
+  const text = String(value || '')
+  return /^\d{4}-\d{2}-\d{2}/.test(text) ? text.slice(0, 10) : text
 }
 
 class PostgresQuery {
@@ -161,7 +176,11 @@ export function createPostgresModel(modelName) {
   function rowToDocument(row) {
     if (!row) return null
     const document = { _id: row.id, id: row.id, createdAt: row.created_at, updatedAt: row.updated_at || row.created_at }
-    for (const [property, column] of Object.entries(config.fields)) document[property] = row[column]
+    for (const [property, column] of Object.entries(config.fields)) {
+      if (property.endsWith('Time')) document[property] = normalizeTime(row[column])
+      else if (property.endsWith('Date') || property === 'dateGiven') document[property] = normalizeDate(row[column])
+      else document[property] = row[column]
+    }
     if (config.activityLog) {
       document.actor = { id: row.actor_id, name: row.actor_name, role: row.actor_role }
       document.entity = { type: row.entity_type, id: row.entity_id, label: row.entity_label }
@@ -188,7 +207,9 @@ export function createPostgresModel(modelName) {
     const row = {}
     for (const [property, column] of Object.entries(config.fields)) {
       if (source[property] !== undefined) {
-        row[column] = config.nullIfEmpty?.includes(property) && source[property] === '' ? null : source[property]
+        if (config.nullIfEmpty?.includes(property) && source[property] === '') row[column] = null
+        else if (config.jsonFields?.includes(property)) row[column] = JSON.stringify(source[property])
+        else row[column] = source[property]
       }
     }
     if (config.schedule && data.clinicHours) {
@@ -209,10 +230,10 @@ export function createPostgresModel(modelName) {
     return rows.map((row) => ({
       ...row,
       available_slots: available.rows.filter((slot) => slot.schedule_id === row.id).map((slot) => ({
-        _id: slot.id, date: slot.slot_date, startTime: normalizeTime(slot.start_time), endTime: normalizeTime(slot.end_time), slotType: slot.slot_type,
+        _id: slot.id, date: normalizeDate(slot.slot_date), startTime: normalizeTime(slot.start_time), endTime: normalizeTime(slot.end_time), slotType: slot.slot_type,
       })),
       blocked_slots: blocked.rows.filter((slot) => slot.schedule_id === row.id).map((slot) => ({
-        _id: slot.id, date: slot.slot_date, startTime: normalizeTime(slot.start_time), endTime: normalizeTime(slot.end_time), reason: slot.reason,
+        _id: slot.id, date: normalizeDate(slot.slot_date), startTime: normalizeTime(slot.start_time), endTime: normalizeTime(slot.end_time), reason: slot.reason,
       })),
     }))
   }
