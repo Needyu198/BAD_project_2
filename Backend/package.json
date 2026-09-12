@@ -1,0 +1,19 @@
+{
+  "name": "web_project_2_backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/sever.js",
+    "start": "node src/sever.js",
+    "db:migrate": "node scripts/migrate.js",
+    "db:migrate-data": "node scripts/migrateAppRecords.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pg": "^8.23.0"
+  }
+}

@@ -1,0 +1,1156 @@
+.dr-screen {
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(
+      circle at 10% 15%,
+      rgba(248, 202, 112, 0.25) 0 110px,
+      transparent 112px
+    ),
+    radial-gradient(
+      circle at 95% 90%,
+      rgba(131, 188, 198, 0.24) 0 140px,
+      transparent 142px
+    ),
+    linear-gradient(180deg, #e4ecef 0%, #d9e2e6 100%);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Login-page palette override for Doctor dashboard */
+.dr-screen {
+  background:
+    radial-gradient(circle at 10% 15%, rgba(214, 181, 147, 0.22) 0 110px, transparent 112px),
+    radial-gradient(circle at 95% 90%, rgba(107, 74, 47, 0.13) 0 140px, transparent 142px),
+    linear-gradient(180deg, #f5eee7 0%, #cfa67a 100%) !important;
+}
+
+.dr-shell,
+.dr-sidebar,
+.dr-main {
+  color: #3b2415 !important;
+  border-color: rgba(107, 74, 47, 0.28) !important;
+}
+
+.dr-shell,
+.dr-main {
+  background: rgba(250, 243, 234, 0.95) !important;
+  box-shadow: 0 20px 32px rgba(107, 74, 47, 0.14) !important;
+}
+
+.dr-sidebar {
+  background: #f9f1e8 !important;
+}
+
+.dr-nav-btn {
+  color: #6b4a2f !important;
+}
+
+.dr-nav-btn:hover {
+  background: rgba(214, 181, 147, 0.32) !important;
+}
+
+.dr-nav-btn.is-active {
+  background: rgba(139, 94, 52, 0.14) !important;
+  color: #3b2415 !important;
+  border: 1px solid rgba(107, 74, 47, 0.28);
+}
+
+.dr-header p,
+.dr-card p,
+.dr-appointment-id,
+.dr-list span {
+  color: #6b4a2f !important;
+}
+
+.dr-card,
+.dr-list li,
+.dr-appointment-list li,
+.dr-consult-list li,
+.dr-prescription-list li,
+.dr-schedule-list li,
+.dr-record-entry,
+.dr-record-metrics > *,
+.dr-info-grid > * {
+  background: #f9f1e8 !important;
+  border-color: rgba(107, 74, 47, 0.18) !important;
+  color: #3b2415 !important;
+  box-shadow: none !important;
+}
+
+.dr-card {
+  background:
+    radial-gradient(circle at 100% 100%, rgba(214, 181, 147, 0.2) 0 80px, transparent 82px),
+    linear-gradient(180deg, rgba(250, 243, 234, 0.95) 0%, #f5eadf 100%) !important;
+  border-color: rgba(107, 74, 47, 0.28) !important;
+}
+
+.dr-count {
+  color: #8b5e34 !important;
+}
+
+.dr-logout,
+.dr-quick-actions button,
+.dr-card button,
+.dr-tab-btn.is-active,
+.dr-appointment-list button,
+.dr-consult-list button,
+.dr-prescription-list button,
+.dr-schedule button {
+  background: #8b5e34 !important;
+  color: #fffaf5 !important;
+  border: 0 !important;
+}
+
+.dr-logout:hover,
+.dr-quick-actions button:hover,
+.dr-card button:hover,
+.dr-appointment-list button:hover,
+.dr-consult-list button:hover,
+.dr-prescription-list button:hover,
+.dr-schedule button:hover {
+  background: #744a28 !important;
+}
+
+.dr-tab-btn {
+  background: #f9f1e8 !important;
+  color: #3b2415 !important;
+  border: 1px solid rgba(107, 74, 47, 0.28) !important;
+}
+
+.dr-filters input,
+.dr-filters select,
+.dr-entry-fields input,
+.dr-entry-fields select,
+.dr-entry-fields textarea,
+.dr-profile-grid input,
+.dr-profile-grid select,
+.dr-profile-grid textarea,
+.dr-card input,
+.dr-card select,
+.dr-card textarea {
+  background: #f9f1e8 !important;
+  border: 1px solid rgba(107, 74, 47, 0.28) !important;
+  color: #3b2415 !important;
+}
+
+.dr-filters input:focus-visible,
+.dr-filters select:focus-visible,
+.dr-entry-fields input:focus-visible,
+.dr-entry-fields select:focus-visible,
+.dr-entry-fields textarea:focus-visible,
+.dr-nav-btn:focus-visible,
+.dr-card button:focus-visible {
+  outline: 3px solid #8b5e34 !important;
+  outline-offset: 2px;
+}
+
+.dr-shell {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  background: rgba(247, 250, 251, 0.95);
+  border: 1px solid rgba(39, 87, 95, 0.2);
+  border-radius: 22px;
+  box-shadow: 0 20px 32px rgba(45, 80, 88, 0.18);
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+  font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+  color: #234146;
+}
+
+.dr-sidebar {
+  background: #f3f7f8;
+  border-radius: 16px;
+  border: 1px solid rgba(66, 106, 114, 0.2);
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.dr-sidebar h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.dr-mini-logo {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  display: block;
+  margin: 0 0 6px;
+}
+
+
+.dr-sidebar nav {
+  display: grid;
+  gap: 7px;
+}
+
+.dr-nav-btn {
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #3e5f66;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 10px;
+  cursor: pointer;
+}
+
+.dr-nav-btn:hover {
+  background: rgba(115, 174, 183, 0.2);
+}
+
+.dr-nav-btn.is-active {
+  background: #5f9ca8;
+  color: #fff;
+}
+
+.dr-logout {
+  margin-top: 2px;
+  border: 0;
+  border-radius: 10px;
+  background: #2f5f69;
+  color: #fff;
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dr-main {
+  min-width: 0;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid rgba(66, 106, 114, 0.2);
+  padding: 14px;
+}
+
+.dr-header h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.dr-header p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #4a6970;
+}
+
+.dr-grid {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.dr-card {
+  border-radius: 14px;
+  background: radial-gradient(
+      circle at 100% 100%,
+      rgba(123, 188, 198, 0.26) 0 80px,
+      transparent 82px
+    ),
+    linear-gradient(180deg, #e6f3f6 0%, #d8eaee 100%);
+  border: 1px solid rgba(77, 125, 133, 0.3);
+  padding: 12px;
+}
+
+.dr-card h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.dr-card p {
+  margin: 7px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.dr-appointment-id {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px !important;
+  color: #4a6970;
+  word-break: break-all;
+}
+
+.dr-count {
+  font-weight: 700;
+  color: #2f5f69;
+}
+
+.dr-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-list li {
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(77, 125, 133, 0.2);
+  padding: 8px 10px;
+  display: grid;
+  gap: 2px;
+}
+
+.dr-list strong {
+  font-size: 12px;
+}
+
+.dr-list span {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.dr-quick-card {
+  grid-column: 1 / -1;
+}
+
+.dr-quick-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dr-quick-actions button {
+  border: 0;
+  border-radius: 999px;
+  background: #2f5f69;
+  color: #fff;
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dr-card button {
+  margin-top: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: #2f5f69;
+  color: #fff;
+  min-height: 33px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dr-appointments {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.dr-appointment-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dr-tab-btn {
+  border: 0;
+  border-radius: 999px;
+  background: #d8eaee;
+  color: #2f5f69;
+  min-height: 34px;
+  padding: 0 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dr-tab-btn.is-active {
+  background: #2f5f69;
+  color: #fff;
+}
+
+.dr-filters {
+  display: grid;
+  gap: 10px;
+}
+
+.dr-filters label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #315a63;
+}
+
+.dr-filters input,
+.dr-filters select {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  min-height: 34px;
+  padding: 0 10px;
+  font: inherit;
+  color: #234146;
+}
+
+.dr-appointment-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-appointment-list li {
+  border-radius: 10px;
+  background: rgba(230, 243, 246, 0.65);
+  border: 1px solid rgba(77, 125, 133, 0.25);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-appointment-list strong {
+  font-size: 13px;
+}
+
+.dr-appointment-list p {
+  margin: 3px 0 0;
+  font-size: 12px;
+}
+
+.dr-status {
+  justify-self: start;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.dr-status-pending {
+  background: #fff2c7;
+  color: #8c6700;
+}
+
+.dr-status-confirmed {
+  background: #d5ecff;
+  color: #1f5d8b;
+}
+
+.dr-status-completed {
+  background: #dff2d4;
+  color: #2e6b2e;
+}
+
+.dr-status-cancelled {
+  background: #ffd9d9;
+  color: #9e2e2e;
+}
+
+.dr-appointment-list button {
+  justify-self: start;
+  border: 0;
+  border-radius: 8px;
+  background: #2f5f69;
+  color: #fff;
+  min-height: 32px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dr-consultation {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.dr-consult-select {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dr-consult-select select {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  min-height: 36px;
+  padding: 0 10px;
+  font: inherit;
+  color: #234146;
+}
+
+.dr-info-grid {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.dr-info-grid p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.dr-consult-form {
+  display: grid;
+  gap: 10px;
+}
+
+.dr-consult-form label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dr-consult-form input,
+.dr-consult-form select {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  color: #234146;
+  font: inherit;
+  min-height: 36px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.dr-consult-form textarea {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  color: #234146;
+  font: inherit;
+  padding: 8px 10px;
+  box-sizing: border-box;
+}
+
+.dr-consult-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.dr-consult-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dr-consult-actions button {
+  border: 0;
+  border-radius: 8px;
+  background: #2f5f69;
+  color: #fff;
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dr-mark-group {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.45);
+  margin: 0;
+  padding: 10px;
+}
+
+.dr-mark-group legend {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+.dr-mark-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.dr-records {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.dr-record-metrics {
+  display: grid;
+  gap: 8px;
+}
+
+.dr-record-metric {
+  border-radius: 9px;
+  border: 1px solid rgba(77, 125, 133, 0.2);
+  background: rgba(255, 255, 255, 0.55);
+  padding: 10px;
+}
+
+.dr-record-metric span {
+  display: block;
+  font-size: 11px;
+  color: #4f6d74;
+}
+
+.dr-record-metric strong {
+  margin-top: 4px;
+  display: block;
+  font-size: 22px;
+  color: #234146;
+}
+
+.dr-record-search {
+  margin-top: 10px;
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  min-height: 36px;
+  padding: 0 10px;
+  font: inherit;
+  color: #234146;
+}
+
+.dr-record-filter-grid {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-record-filter-grid select,
+.dr-record-filter-grid input[type="date"] {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  min-height: 36px;
+  padding: 0 10px;
+  font: inherit;
+  color: #234146;
+}
+
+.dr-record-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-record-list li {
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(77, 125, 133, 0.2);
+  padding: 10px;
+}
+
+.dr-record-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: start;
+}
+
+.dr-record-head p {
+  margin-top: 3px !important;
+  color: #4f6d74;
+}
+
+.dr-record-date {
+  border-radius: 999px;
+  background: rgba(56, 102, 111, 0.12);
+  color: #315a63;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.dr-record-body {
+  margin-top: 8px;
+}
+
+.dr-record-list p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.dr-record-list p + p {
+  margin-top: 4px;
+}
+
+.dr-record-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dr-record-actions button {
+  border: 0;
+  border-radius: 8px;
+  background: #2f5f69;
+  color: #fff;
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dr-record-entry .dr-entry-fields {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-record-entry input,
+.dr-record-entry select,
+.dr-record-entry textarea {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  color: #234146;
+  font: inherit;
+  padding: 8px 10px;
+  box-sizing: border-box;
+}
+
+.dr-prescriptions {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.dr-prescription-form .dr-entry-fields {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-prescription-form input,
+.dr-prescription-form select,
+.dr-prescription-form textarea {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  color: #234146;
+  font: inherit;
+  min-height: 36px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.dr-prescription-form textarea {
+  min-height: 78px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.dr-prescription-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-prescription-list li {
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(77, 125, 133, 0.2);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-prescription-list strong {
+  font-size: 13px;
+}
+
+.dr-prescription-list p {
+  margin: 3px 0 0;
+  font-size: 12px;
+}
+
+.dr-prescription-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dr-prescription-actions button {
+  border: 0;
+  border-radius: 8px;
+  background: #2f5f69;
+  color: #fff;
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dr-schedule {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.dr-schedule .dr-entry-fields {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-schedule .dr-entry-fields input {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  color: #234146;
+  font: inherit;
+  min-height: 36px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.dr-schedule button[type="submit"] {
+  margin-top: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #2f5f69;
+  color: #fff;
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dr-simple-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.dr-simple-list li {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(77, 125, 133, 0.2);
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.dr-simple-list li button {
+  border: 0;
+  border-radius: 8px;
+  background: #8e2f2f;
+  color: #fff;
+  min-height: 28px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dr-working-hours .dr-hours-grid {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-working-hours label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #315a63;
+}
+
+.dr-working-hours input {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  min-height: 36px;
+  padding: 0 10px;
+  font: inherit;
+  color: #234146;
+}
+
+.dr-profile-settings {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.dr-profile-summary {
+  display: grid;
+  gap: 10px;
+  align-items: center;
+}
+
+.dr-profile-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #2f5f69;
+  color: #fff;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.dr-profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dr-profile-meta h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.dr-profile-meta p {
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+
+.dr-profile-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dr-profile-badges span {
+  border-radius: 999px;
+  background: rgba(47, 95, 105, 0.14);
+  color: #2f5f69;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 10px;
+}
+
+.dr-profile-grid {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-photo-preview {
+  margin-top: 10px;
+  width: 130px;
+  height: 130px;
+  border-radius: 14px;
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  background: rgba(247, 251, 252, 0.85);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.dr-photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dr-photo-preview span {
+  font-size: 12px;
+  color: #4f6d74;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.dr-profile-grid label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #315a63;
+}
+
+.dr-profile-grid input {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  min-height: 36px;
+  padding: 0 10px;
+  font: inherit;
+  color: #234146;
+}
+
+.dr-profile-grid select {
+  border: 1px solid rgba(77, 125, 133, 0.35);
+  border-radius: 8px;
+  background: #f7fbfc;
+  min-height: 36px;
+  padding: 0 10px;
+  font: inherit;
+  color: #234146;
+}
+
+.dr-form-success {
+  margin: 8px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1f6a47;
+}
+
+.dr-form-error {
+  margin: 8px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8b3131;
+}
+
+.dr-security-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dr-danger-btn {
+  background: #8e2f2f !important;
+}
+
+.dr-2fa-toggle {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dr-toggle-list {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.dr-toggle-list label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #35564e;
+}
+
+.dr-toggle-list input {
+  accent-color: #2f5f69;
+}
+
+@media (min-width: 900px) {
+  .dr-shell {
+    grid-template-columns: 290px minmax(0, 1fr);
+    padding: 20px;
+  }
+
+  .dr-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dr-filters {
+    grid-template-columns: repeat(2, minmax(0, 220px));
+  }
+
+  .dr-appointment-list li {
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+  }
+
+  .dr-appointment-list button {
+    justify-self: end;
+  }
+
+  .dr-info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 14px;
+  }
+
+  .dr-consult-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dr-records {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dr-record-metrics {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .dr-record-entry {
+    grid-column: 1 / -1;
+  }
+
+  .dr-record-entry .dr-entry-fields {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dr-record-filter-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .dr-prescriptions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dr-prescription-form .dr-entry-fields {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dr-prescription-list li {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .dr-schedule {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dr-schedule .dr-entry-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dr-working-hours {
+    grid-column: 1 / -1;
+  }
+
+  .dr-working-hours .dr-hours-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dr-profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dr-profile-summary {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .dr-profile-grid .dr-full {
+    grid-column: 1 / -1;
+  }
+}
