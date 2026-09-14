@@ -1,3 +1,4 @@
+import QueuePage from "../../../components/Queue/QueuePage";
 import { useEffect, useState } from "react";
 import "../css/dashboard.css";
 import {
@@ -20,6 +21,7 @@ import { compressImageFileToDataUrl } from "../../../lib/imageUpload";
 import logo from "../../../images/Web_Logo.png";
 
 const SIDEBAR_ITEMS = [
+  { id: "Queue Status", label: "Queue Status", icon: "🎟️" },
   { id: "Dashboard", label: "Dashboard", icon: "🏠" },
   { id: "Book Appointment", label: "Book Appointment", icon: "📝" },
   { id: "My Pets", label: "My Pets", icon: "🐾" },
@@ -29,6 +31,7 @@ const SIDEBAR_ITEMS = [
 ];
 
 const PAGE_DESCRIPTIONS = {
+  "Queue Status": "Check in your pet and follow your place in the queue.",
   "My Pets": "Manage pet profiles, photos, vaccines, and basic health details.",
   "Appointment History":
     "Review upcoming, completed, and cancelled appointments.",
@@ -2257,7 +2260,9 @@ export default function PetOwnerDashboard({ role, currentUser, onLogout }) {
             </div>
 
             {isPetOwner ? (
-              activePage === "Dashboard" ? (
+              activePage === "Queue Status" ? (
+                <QueuePage currentUser={currentUser} pets={pets} />
+              ) : activePage === "Dashboard" ? (
                 <DashboardCards
                   pets={pets}
                   appointments={appointments}

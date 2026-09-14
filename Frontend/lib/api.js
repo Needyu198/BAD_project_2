@@ -261,3 +261,21 @@ export function deleteVaccinationById(vaccinationId) {
     method: "DELETE",
   });
 }
+
+export function listQueue(userId, options = {}) {
+  return request(withQuery('/api/queue', { userId }), options);
+}
+
+export function checkInQueue(userId, petId) {
+  return request(withQuery('/api/queue/check-in', { userId }), {
+    method: 'POST', body: JSON.stringify({ petId }),
+  });
+}
+
+export function callNextPatient(userId) {
+  return request(withQuery('/api/queue/next', { userId }), { method: 'POST' });
+}
+
+export function cancelQueueEntry(userId, id) {
+  return request(withQuery(`/api/queue/${encodeURIComponent(id)}/cancel`, { userId }), { method: 'PATCH' });
+}

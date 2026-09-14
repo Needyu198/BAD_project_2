@@ -9,13 +9,15 @@ if (!databaseUrl) {
   throw new Error('DATABASE_URL or POSTGRES_URL is not set.')
 }
 
-const migrationUrl = new URL('../migrations/001_initial_schema.sql', import.meta.url)
-const migrationSql = await readFile(fileURLToPath(migrationUrl), 'utf8')
 const pool = new pg.Pool({ connectionString: databaseUrl, max: 1 })
 
 try {
-  await pool.query(migrationSql)
-  console.log('Applied migration 001_initial_schema.')
+  for (const name of ['001_initial_schema', '002_queue']) {
+    const migrationUrl = new URL(`../migrations/${name}.sql`, import.meta.url)
+    const migrationSql = await readFile(fileURLToPath(migrationUrl), 'utf8')
+    await pool.query(migrationSql)
+    console.log(`Applied migration ${name}.`)
+  }
 } finally {
   await pool.end()
 }

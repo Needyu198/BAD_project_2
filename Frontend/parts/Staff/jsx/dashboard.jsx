@@ -1,3 +1,4 @@
+import QueuePage from "../../../components/Queue/QueuePage";
 import { useEffect, useState } from "react";
 import "../css/dashboard.css";
 import {
@@ -36,6 +37,7 @@ import { compressImageFileToDataUrl } from "../../../lib/imageUpload";
 import logo from "../../../images/Web_Logo.png";
 
 const STAFF_PAGES = [
+  "Queue Management",
   "Dashboard",
   "Appointment Management",
   "Pet Owner Management",
@@ -46,6 +48,7 @@ const STAFF_PAGES = [
 ];
 
 const STAFF_CONTENT = {
+  "Queue Management": { subtitle: "Check the waiting queue and call the next patient.", cards: [] },
   Dashboard: {
     subtitle:
       "Track appointments, owner requests, and payment updates in one place.",
@@ -2140,7 +2143,9 @@ export default function StaffDashboard({ currentUser, onLogout }) {
             <p>{activeContent.subtitle}</p>
           </header>
 
-          {activePage === "Dashboard" ? (
+          {activePage === "Queue Management" ? (
+            <QueuePage currentUser={currentUser} staff />
+          ) : activePage === "Dashboard" ? (
             <div className="st-dashboard-layout">
               <article className="st-card st-quick-overview">
                 <h3>At a Glance</h3>

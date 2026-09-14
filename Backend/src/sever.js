@@ -17,6 +17,8 @@ import { activityLogRouter } from "./routes/activityLogRoutes.js";
 import { vaccinationRouter } from "./routes/vaccinationRoutes.js";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 
+import { queueRouter } from "./routes/queueRoutes.js";
+
 const app = express();
 const port = Number(process.env.PORT) || 5000;
 const host = process.env.HOST || "0.0.0.0";
@@ -68,6 +70,8 @@ app.use("/api/reports", reportRouter);
 app.use("/api/medical-records", medicalRecordRouter);
 app.use("/api/activity-logs", activityLogRouter);
 app.use("/api/vaccinations", vaccinationRouter);
+
+app.use("/api/queue", queueRouter);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
