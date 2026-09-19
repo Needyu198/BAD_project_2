@@ -1,5 +1,6 @@
 import { Queue } from '../models/Queue.js'
 import { User } from '../models/User.js'
+import { emitQueueUpdated } from '../realtime/queueSocket.js'
 
 // Matches the existing userId-based API convention; this is not session authentication.
 export async function queueActor(req, res, next) {
@@ -20,6 +21,7 @@ export async function checkIn(req, res) {
   if (!petId) return res.status(400).json({ message: 'petId is required.' })
   if (req.queueActor.role !== 'pet-owner') return res.status(403).json({ message: 'Check in using a pet-owner account.' })
   const id = await Queue.checkIn(req.queueActor.id, petId)
+  emitQueueUpdated('checked-in', id)
   const data = await Queue.snapshot(req.queueActor.id, id)
   return res.status(201).json({ entry: data.queue[0] })
 }
@@ -45,6 +47,7 @@ export async function getQueue(req, res) {
 export async function nextPatient(req, res) {
   if (req.queueActor.role !== 'staff') return res.status(403).json({ message: 'Staff access is required.' })
   const id = await Queue.next()
+  emitQueueUpdated('next-called', id)
   if (!id) return res.json({ message: 'No patients waiting' })
   const data = await Queue.snapshot(null, id)
   return res.json({ entry: data.queue[0] })
@@ -52,6 +55,7 @@ export async function nextPatient(req, res) {
 
 export async function cancelQueue(req, res) {
   const id = await Queue.cancel(req.params.id, ownerScope(req))
+  emitQueueUpdated('cancelled', id)
   const data = await Queue.snapshot(ownerScope(req), id)
   return res.json({ entry: data.queue[0] })
 }

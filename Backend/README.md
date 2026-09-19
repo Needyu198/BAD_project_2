@@ -54,3 +54,5 @@ npm run dev
 ```
 
 The API runs at `http://localhost:5001` by default. If you use another port, set the same URL in the frontend's `VITE_API_BASE_URL`.
+
+The queue feature also runs Socket.IO on the same host and port. See [QUEUE.md](./QUEUE.md) for the real-time architecture, setup, event flow, and manual test procedure.

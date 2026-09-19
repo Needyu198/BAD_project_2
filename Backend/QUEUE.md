@@ -1,6 +1,25 @@
-# Veterinary queue
+# Veterinary queue with Socket.IO
 
-The queue uses the existing Express REST API, PostgreSQL pool, and React dashboard navigation. It adds no packages, WebSocket connections, or Socket.IO. Existing appointments and consultations remain independent from queue status.
+The queue uses PostgreSQL as the source of truth, Express REST endpoints for reads and mutations, and Socket.IO for real-time notifications. Socket.IO attempts a WebSocket connection first and can fall back to HTTP long-polling when a proxy or network does not support WebSocket. Existing appointments and consultations remain independent from queue status.
+
+## How the real-time flow works
+
+```text
+Staff/owner action
+      |
+      v
+Express REST endpoint -----> PostgreSQL transaction
+      |                              |
+      | successful commit            | authoritative queue state
+      v                              |
+Socket.IO emits queue:updated        |
+      |                              |
+      v                              |
+All QueuePage clients re-fetch ------+
+their permitted REST snapshot
+```
+
+The socket event contains only `change`, `entryId`, and `changedAt`. It deliberately does not contain owner or pet information. Staff and pet owners receive the same change signal, but the subsequent REST response is still scoped by the existing `userId` and role checks.
 
 ## Setup and run
 
@@ -25,10 +44,28 @@ In a second terminal, from the project root:
 ```sh
 cd Frontend
 npm ci
-VITE_API_BASE_URL=http://localhost:5001 npm run dev
+cp .env.example .env
+npm run dev
 ```
 
 Open http://localhost:5173 (or the URL Vite prints). The frontend defaults to backend port 5001; the server defaults to 5000 if PORT is omitted, so keep these settings aligned.
+
+The browser console's Network tab shows a connection under `WS` at `/socket.io/`. The queue page also displays `Real-time: connected`. If the socket disconnects temporarily, Socket.IO reconnects automatically and a 30-second safety refresh keeps the page from becoming permanently stale.
+
+## Socket.IO setup, step by step
+
+1. Install `socket.io` in `Backend` and `socket.io-client` in `Frontend`.
+2. Create a Node HTTP server from the Express app in `Backend/src/sever.js`.
+3. Attach `new Server(httpServer, ...)` to that same HTTP server. REST and Socket.IO therefore share one host and port.
+4. Configure the same allowed frontend origins for Express CORS and Socket.IO CORS.
+5. Register connections in `Backend/src/realtime/queueSocket.js`; every queue page joins the `queue` room.
+6. After a successful check-in, next-patient call, or cancellation, emit `queue:updated` from the controller.
+7. Connect the React page with `socket.io-client`, listen for `queue:updated`, and call the existing `listQueue` REST API.
+8. Remove the listener and disconnect the socket when the component unmounts so navigation does not create duplicate connections.
+
+Important distinction for an explanation: WebSocket is the low-level, full-duplex transport. Socket.IO is a higher-level real-time library that can use WebSocket, adds named events such as `queue:updated`, reconnects automatically, supports rooms, and can fall back to HTTP long-polling. A raw WebSocket client cannot connect directly to a Socket.IO server because the Socket.IO protocol adds its own handshake and message format.
+
+For multiple backend server instances, replace the in-memory Socket.IO room broadcast with the Socket.IO Redis adapter so an event created on one instance reaches clients connected to every instance.
 
 ## Exact manual test
 
@@ -38,13 +75,13 @@ Use a fresh queue table in a development database to obtain literal A001 and A00
 2. Open **Queue Status**, select Milo, and click **Check In**. Verify **A001**, **WAITING**, and **0** patients ahead.
 3. Select Coco and click **Check In**. Verify **A002**, **WAITING**, and **1** patient ahead. The visit selector lets you revisit A001.
 4. In a second browser tab, sign in as a staff account. Open **Queue Management**. Verify A001 then A002 in the waiting table, including pet and owner names.
-5. Click **Call Next Patient** once. Verify **A001** is currently **SERVING** and A002 remains **WAITING**. In the owner tab, wait up to five seconds or click **Refresh**; A001 shows the proceed-to-consultation message. A002 has **0** waiting patients ahead because the serving patient is excluded.
+5. Click **Call Next Patient** once. Verify **A001** is currently **SERVING** and A002 remains **WAITING**. The owner tab should update immediately without a manual refresh; A001 shows the proceed-to-consultation message. A002 has **0** waiting patients ahead because the serving patient is excluded.
 6. Click **Call Next Patient** again. Verify staff's currently serving number is **A002**.
 7. In the owner tab, select A001 and refresh. Verify **COMPLETED** and the completion message. Select A002 and verify **SERVING** and the proceed-to-consultation message.
 8. Click **Call Next Patient** once more. A002 completes, no patient is serving, and the response message is **No patients waiting**.
 9. Check in another pet and cancel it while WAITING. Verify **CANCELLED**, removal from staff's waiting table after refresh, and the cancellation message. SERVING and terminal entries cannot be cancelled.
 10. For the requested count example, leave one patient SERVING, then check in three other pets. The last WAITING pet has **2** patients ahead. Cancelling an earlier WAITING entry reduces this count.
-11. Navigate away from the owner queue page. Its five-second polling timer is cleared, and pending reads are aborted.
+11. Navigate away from the owner queue page. Its Socket.IO listener, connection, safety timer, and pending reads are cleaned up.
 
 ## API
 
