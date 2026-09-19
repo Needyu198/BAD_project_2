@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { listQueue, checkInQueue, callNextPatient, cancelQueueEntry } from '../../lib/api';
+import { connectQueueSocket } from '../../lib/queueSocket';
 import './queue.css';
 
 function statusMessage(entry) {
@@ -21,6 +22,7 @@ export default function QueuePage({ currentUser, staff = false, pets = [] }) {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [updatedAt, setUpdatedAt] = useState(null);
+  const [realtimeStatus, setRealtimeStatus] = useState('connecting');
   const requestRef = useRef(null);
   const mounted = useRef(false);
   const actionPending = useRef(false);
@@ -46,16 +48,36 @@ export default function QueuePage({ currentUser, staff = false, pets = [] }) {
 
   useEffect(() => {
     mounted.current = true;
+    setRealtimeStatus('connecting');
     refresh();
-    const timer = staff ? null : window.setInterval(() => {
+
+    const socket = connectQueueSocket();
+    const handleQueueUpdate = () => {
       if (!actionPending.current) refresh();
-    }, 5000);
+    };
+    const handleConnect = () => setRealtimeStatus('connected');
+    const handleDisconnect = () => setRealtimeStatus('disconnected');
+    socket.on('connect', handleConnect);
+    socket.on('disconnect', handleDisconnect);
+    socket.on('connect_error', handleDisconnect);
+    socket.on('queue:updated', handleQueueUpdate);
+
+    // Safety-net refresh in case a proxy or temporary network issue blocks sockets.
+    const timer = window.setInterval(() => {
+      if (!actionPending.current) refresh();
+    }, 30000);
+
     return () => {
       mounted.current = false;
       window.clearInterval(timer);
       requestRef.current?.abort();
+      socket.off('connect', handleConnect);
+      socket.off('disconnect', handleDisconnect);
+      socket.off('connect_error', handleDisconnect);
+      socket.off('queue:updated', handleQueueUpdate);
+      socket.disconnect();
     };
-  }, [refresh, staff]);
+  }, [refresh]);
 
   async function act(action) {
     if (actionPending.current) return;
@@ -94,6 +116,7 @@ export default function QueuePage({ currentUser, staff = false, pets = [] }) {
         {staff && <button disabled={busy || loading} onClick={() => act(() => callNextPatient(userId))}>Call Next Patient</button>}
         <button disabled={busy} onClick={refresh}>{staff ? 'Refresh Queue' : 'Refresh'}</button>
         <span>{updatedAt ? `Last refreshed ${updatedAt.toLocaleTimeString()}` : 'Loading queue…'}</span>
+        <span role="status">Real-time: {realtimeStatus}</span>
       </div>
       {error && <p role="alert" className="queue-error">{error}</p>}
       {message && <p role="status">{message}</p>}
@@ -147,7 +170,7 @@ export default function QueuePage({ currentUser, staff = false, pets = [] }) {
             <p role="status">{statusMessage(selected)}</p>
             {selected.status === 'WAITING' && <button disabled={busy} onClick={() => act(() => cancelQueueEntry(userId, selected.id))}>Cancel Queue</button>}
           </> : <p>{loading ? 'Loading queue…' : 'Check in your pet to receive a queue number.'}</p>}
-          <p>Queue status refreshes every 5 seconds.</p>
+          <p>Queue status updates in real time.</p>
         </article>
       </>}
     </section>
