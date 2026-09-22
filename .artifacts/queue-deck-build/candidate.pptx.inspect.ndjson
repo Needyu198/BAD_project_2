@@ -1,229 +1,264 @@
-{"kind":"deck","id":"pr/gsz7eu","name":"Deck"}
-{"kind":"layout","layoutId":"ad55a420-0598-4158-af01-c6f70c0245f1","name":"Master","type":"master"}
-{"kind":"layout","layoutId":"d65f459e-00b9-4c47-8bf5-9527f0076075","name":"Title Slide","type":"title"}
-{"kind":"slide","id":"sl/gevjdf","slide":1,"title":"REAL-TIME","textShapes":8}
-{"kind":"shape","id":"sh/kr25sb6d","slide":1,"bbox":[890,-170,560,560]}
-{"kind":"shape","id":"sh/zqt4j6ps","slide":1,"bbox":[1000,350,380,380]}
-{"kind":"textbox","id":"sh/ypk3q1o7","slide":1,"text":"REAL-TIME","textPreview":"REAL-TIME","textChars":9,"textLines":1,"bbox":[70,95,600,58]}
-{"kind":"textbox","id":"sh/9wvmpg7u","slide":1,"text":"Veterinary Clinic\nQueue Management","textPreview":"Veterinary Clinic | Queue Management","textChars":34,"textLines":2,"bbox":[70,148,760,160]}
-{"kind":"textbox","id":"sh/8vm5wb69","slide":1,"text":"WebSocket and Socket.IO","textPreview":"WebSocket and Socket.IO","textChars":23,"textLines":1,"bbox":[74,327,620,48]}
-{"kind":"shape","id":"sh/7ud4nqpo","slide":1,"bbox":[74,407,525,0]}
-{"kind":"textbox","id":"sh/mt4nulo3","slide":1,"text":"A live queue that keeps pet owners and clinic staff in sync","textPreview":"A live queue that keeps pet owners and clinic staff in sync","textChars":59,"textLines":1,"bbox":[74,430,610,70]}
-{"kind":"textbox","id":"sh/hkfmt07q","slide":1,"text":"A001","textPreview":"A001","textChars":4,"textLines":1,"bbox":[865,250,118,118]}
-{"kind":"textbox","id":"sh/wjm50v65","slide":1,"text":"A002","textPreview":"A002","textChars":4,"textLines":1,"bbox":[995,353,102,102]}
-{"kind":"textbox","id":"sh/e98rqlgf","slide":1,"text":"A003","textPreview":"A003","textChars":4,"textLines":1,"bbox":[1080,185,92,92]}
-{"kind":"textbox","id":"sh/fa18jqh0","slide":1,"text":"10-minute presentation and live demo","textPreview":"10-minute presentation and live demo","textChars":36,"textLines":1,"bbox":[74,632,500,30]}
-{"kind":"notes","id":"nt/gevjdf","slide":1,"text":"Good morning. Today I will present our proposal for a real-time veterinary clinic queue management system. In the current queue experience, pet owners must refresh the page or ask staff for updates. Our proposed change uses WebSocket and Socket.IO so queue changes reach connected owner screens immediately. I will explain the problem, the proposed solution, the technical design, the implementation plan, and then show a short live demonstration."}
-{"kind":"slide","id":"sl/h2u7z6","slide":2,"title":"02","textShapes":10}
-{"kind":"shape","id":"sh/kz614zqx","slide":2,"bbox":[0,0,18,720]}
-{"kind":"textbox","id":"sh/zyx0ve9c","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
-{"kind":"textbox","id":"sh/yxoj29sr","slide":2,"text":"Clinic queue problem","textPreview":"Clinic queue problem","textChars":20,"textLines":1,"bbox":[52,64,1120,60]}
-{"kind":"textbox","id":"sh/xwfit4r6","slide":2,"text":"The current queue page does not update automatically","textPreview":"The current queue page does not update automatically","textChars":52,"textLines":1,"bbox":[54,120,1110,34]}
-{"kind":"shape","id":"sh/cv610za1","slide":2,"bbox":[52,162,1168,0]}
-{"kind":"textbox","id":"sh/bux0ru9g","slide":2,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
-{"kind":"textbox","id":"sh/atojypsv","slide":2,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
-{"kind":"textbox","id":"sh/orm1wfap","slide":2,"text":"Owners need four answers","textPreview":"Owners need four answers","textChars":24,"textLines":1,"bbox":[70,205,370,34]}
-{"kind":"textbox","id":"sh/it4rmdsf","slide":2,"text":"• Which number is being served?\n• How many patients are ahead?\n• Is their turn approaching?\n• Has their appointment been called?","textPreview":"• Which number is being served? | • How many patients are ahead? | • Is their turn approaching? | • Has their appointment been called?","textChars":128,"textLines":4,"bbox":[70,248,510,180]}
-{"kind":"textbox","id":"sh/jux8vit0","slide":2,"text":"Current workaround","textPreview":"Current workaround","textChars":18,"textLines":1,"bbox":[70,450,250,34]}
-{"kind":"textbox","id":"sh/4f69onal","slide":2,"text":"Refresh the page repeatedly or ask clinic staff for an update.","textPreview":"Refresh the page repeatedly or ask clinic staff for an update.","textChars":62,"textLines":1,"bbox":[70,493,510,88]}
-{"kind":"shape","id":"sh/5gfqxsb6","slide":2,"bbox":[670,550,520,78]}
-{"kind":"textbox","id":"sh/up47idsj","slide":2,"text":"Result: uncertainty, unnecessary waiting, and repeated questions for staff","textPreview":"Result: uncertainty, unnecessary waiting, and repeated questions for staff","textChars":74,"textLines":1,"bbox":[695,564,470,50]}
-{"kind":"image","id":"im/cvyt87ql","slide":2,"name":"","geometry":"roundRect","alt":"PawEver pet owner dashboard","bbox":[670,198,520,330]}
-{"kind":"notes","id":"nt/h2u7z6","slide":2,"text":"The current queue gives pet owners a number after check-in, but the information does not update automatically. Owners need to know which number staff are serving, how many patients are ahead, whether their turn is approaching, and whether staff have called their appointment. Today they must repeatedly refresh or ask clinic staff. This creates uncertainty, unnecessary waiting, and repeated questions that interrupt clinic work."}
-{"kind":"slide","id":"sl/bxbbfq","slide":3,"title":"03","textShapes":22}
-{"kind":"shape","id":"sh/juxsfax0","slide":3,"bbox":[0,0,18,720]}
-{"kind":"textbox","id":"sh/kv6tofel","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
-{"kind":"textbox","id":"sh/5wzahkf6","slide":3,"text":"Proposed solution","textPreview":"Proposed solution","textChars":17,"textLines":1,"bbox":[52,64,1120,60]}
-{"kind":"textbox","id":"sh/a5obi5wj","slide":3,"text":"Staff action triggers an immediate update on every connected owner screen","textPreview":"Staff action triggers an immediate update on every connected owner screen","textChars":73,"textLines":1,"bbox":[54,120,1110,34]}
-{"kind":"shape","id":"sh/v6xsbax4","slide":3,"bbox":[52,162,1168,0]}
-{"kind":"textbox","id":"sh/wr6tkfep","slide":3,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
-{"kind":"textbox","id":"sh/xsfadkfa","slide":3,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
-{"kind":"textbox","id":"sh/m14belgn","slide":3,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[142,205,64,64]}
-{"kind":"textbox","id":"sh/n2ds7qxs","slide":3,"text":"Owner checks in","textPreview":"Owner checks in","textChars":15,"textLines":1,"bbox":[64,285,220,35]}
-{"kind":"textbox","id":"sh/jyp87m54","slide":3,"text":"System assigns a queue number","textPreview":"System assigns a queue number","textChars":29,"textLines":1,"bbox":[64,327,220,75]}
-{"kind":"shape","id":"sh/ixgryhoj","slide":3,"bbox":[289,226,62,24]}
-{"kind":"textbox","id":"sh/507q9wna","slide":3,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[442,205,64,64]}
-{"kind":"textbox","id":"sh/4zy90rmp","slide":3,"text":"Staff calls next","textPreview":"Staff calls next","textChars":16,"textLines":1,"bbox":[364,285,220,35]}
-{"kind":"textbox","id":"sh/r298b65g","slide":3,"text":"Queue state changes on the server","textPreview":"Queue state changes on the server","textChars":33,"textLines":1,"bbox":[364,327,220,75]}
-{"kind":"shape","id":"sh/61gr214v","slide":3,"bbox":[589,226,62,24]}
-{"kind":"textbox","id":"sh/toradgn6","slide":3,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[742,205,64,64]}
-{"kind":"textbox","id":"sh/sni94bm1","slide":3,"text":"Server broadcasts","textPreview":"Server broadcasts","textChars":17,"textLines":1,"bbox":[664,285,220,35]}
-{"kind":"textbox","id":"sh/7658z25w","slide":3,"text":"Socket.IO sends the update","textPreview":"Socket.IO sends the update","textChars":26,"textLines":1,"bbox":[664,327,220,75]}
-{"kind":"shape","id":"sh/m5wr6xob","slide":3,"bbox":[889,226,62,24]}
-{"kind":"textbox","id":"sh/ql4be5oz","slide":3,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1042,205,64,64]}
-{"kind":"textbox","id":"sh/bmdc7apk","slide":3,"text":"Screen changes","textPreview":"Screen changes","textChars":14,"textLines":1,"bbox":[964,285,220,35]}
-{"kind":"textbox","id":"sh/cnmtgf65","slide":3,"text":"Owners see the new state instantly","textPreview":"Owners see the new state instantly","textChars":34,"textLines":1,"bbox":[964,327,220,75]}
-{"kind":"shape","id":"sh/dovu9k7q","slide":3,"bbox":[140,455,1000,125]}
-{"kind":"textbox","id":"sh/2hkba5o3","slide":3,"text":"Before","textPreview":"Before","textChars":6,"textLines":1,"bbox":[180,478,250,32]}
-{"kind":"textbox","id":"sh/3itc3apo","slide":3,"text":"Refresh page or ask staff","textPreview":"Refresh page or ask staff","textChars":25,"textLines":1,"bbox":[165,516,280,38]}
-{"kind":"textbox","id":"sh/oj2tcf69","slide":3,"text":"No manual refresh","textPreview":"No manual refresh","textChars":17,"textLines":1,"bbox":[500,487,280,55]}
-{"kind":"textbox","id":"sh/pkbu507e","slide":3,"text":"After","textPreview":"After","textChars":5,"textLines":1,"bbox":[850,478,250,32]}
-{"kind":"textbox","id":"sh/et0b6l8r","slide":3,"text":"Current number, patients ahead, and call status update automatically","textPreview":"Current number, patients ahead, and call status update automatically","textChars":68,"textLines":1,"bbox":[820,510,310,55]}
-{"kind":"notes","id":"nt/bxbbfq","slide":3,"text":"Our proposed solution adds a continuous real-time channel. The owner checks in and receives a queue number. When staff click Call Next Patient, the application updates the queue on the server. Socket.IO immediately broadcasts the new queue state to connected owner screens. The interface then shows the current number, patients ahead, and whether the pet has been called. The owner does not press Refresh."}
-{"kind":"slide","id":"sl/1wo89b","slide":4,"title":"04","textShapes":12}
-{"kind":"shape","id":"sh/axszu1g3","slide":4,"bbox":[0,0,18,720]}
-{"kind":"textbox","id":"sh/xk3i5gzu","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
-{"kind":"textbox","id":"sh/wjuhwby9","slide":4,"text":"Technology of interest","textPreview":"Technology of interest","textChars":22,"textLines":1,"bbox":[52,64,1120,60]}
-{"kind":"textbox","id":"sh/nu10z6hc","slide":4,"text":"Socket.IO manages a persistent real-time channel between browser and server","textPreview":"Socket.IO manages a persistent real-time channel between browser and server","textChars":75,"textLines":1,"bbox":[54,120,1110,34]}
-{"kind":"shape","id":"sh/mtszq1g7","slide":4,"bbox":[52,162,1168,0]}
-{"kind":"textbox","id":"sh/9wji1wzi","slide":4,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
-{"kind":"textbox","id":"sh/ovahsryx","slide":4,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
-{"kind":"shape","id":"sh/7q50bqhw","slide":4,"bbox":[74,205,500,350]}
-{"kind":"textbox","id":"sh/6pwz2lgb","slide":4,"text":"WebSocket","textPreview":"WebSocket","textChars":9,"textLines":1,"bbox":[104,235,440,50]}
-{"kind":"textbox","id":"sh/sbqlobid","slide":4,"text":"A persistent, full-duplex connection","textPreview":"A persistent, full-duplex connection","textChars":36,"textLines":1,"bbox":[115,300,420,38]}
-{"kind":"shape","id":"sh/dcz2xgzy","slide":4,"bbox":[150,380,350,0]}
-{"kind":"textbox","id":"sh/q983m10n","slide":4,"text":"Browser and server can exchange messages without creating a new HTTP request for every update.","textPreview":"Browser and server can exchange messages without creating a new HTTP request for every update.","textChars":94,"textLines":1,"bbox":[115,411,420,96]}
-{"kind":"shape","id":"sh/rahkv6h8","slide":4,"bbox":[706,205,500,350]}
-{"kind":"textbox","id":"sh/47qlkrih","slide":4,"text":"Socket.IO","textPreview":"Socket.IO","textChars":9,"textLines":1,"bbox":[736,235,440,50]}
-{"kind":"textbox","id":"sh/58z2twz2","slide":4,"text":"The real-time library used by PawEver","textPreview":"The real-time library used by PawEver","textChars":37,"textLines":1,"bbox":[747,300,420,38]}
-{"kind":"textbox","id":"sh/i5o3ih0b","slide":4,"text":"Real-time event communication\nAutomatic connection handling\nBroadcasting to many users\nRooms for clinic departments\nReconnection support","textPreview":"Real-time event communication | Automatic connection handling | Broadcasting to many users | Rooms for clinic departments | Reconnection ...","textChars":136,"textLines":5,"bbox":[770,352,375,180]}
-{"kind":"shape","id":"sh/36hkrmhw","slide":4,"bbox":[594,348,92,32]}
-{"kind":"textbox","id":"sh/gj61gri5","slide":4,"text":"uses","textPreview":"uses","textChars":4,"textLines":1,"bbox":[609,310,60,24]}
-{"kind":"notes","id":"nt/1wo89b","slide":4,"text":"WebSocket provides continuous two-way communication between a client and server. The connection stays open, so the server can send a queue change as soon as it happens. Socket.IO simplifies this work. It provides real-time events, automatic connection handling, broadcasting to multiple users, rooms that can separate clinic departments, and reconnection support. Our first proof can use one shared queue room. Department-specific rooms are part of the proposed extension."}
-{"kind":"slide","id":"sl/u684dv","slide":5,"title":"05","textShapes":25}
-{"kind":"shape","id":"sh/honitkbm","slide":5,"bbox":[0,0,18,720]}
-{"kind":"textbox","id":"sh/ulwzy5sv","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
-{"kind":"textbox","id":"sh/fm50ratg","slide":5,"text":"Queue update flow","textPreview":"Queue update flow","textChars":17,"textLines":1,"bbox":[52,64,1120,60]}
-{"kind":"textbox","id":"sh/4by14zad","slide":5,"text":"One staff action reaches every connected pet-owner screen","textPreview":"One staff action reaches every connected pet-owner screen","textChars":57,"textLines":1,"bbox":[54,120,1110,34]}
-{"kind":"shape","id":"sh/pc7ixkbi","slide":5,"bbox":[52,162,1168,0]}
-{"kind":"textbox","id":"sh/2pwj2ps7","slide":5,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
-{"kind":"textbox","id":"sh/3a50vuts","slide":5,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
-{"kind":"shape","id":"sh/cfy18za9","slide":5,"bbox":[70,205,190,72]}
-{"kind":"textbox","id":"sh/dg7i14bu","slide":5,"text":"Clinic staff","textPreview":"Clinic staff","textChars":12,"textLines":1,"bbox":[80,218,170,45]}
-{"kind":"shape","id":"sh/14j6pwbm","slide":5,"bbox":[264,226,31,20]}
-{"kind":"shape","id":"sh/03a5gru1","slide":5,"bbox":[300,205,190,72]}
-{"kind":"textbox","id":"sh/z214n6tg","slide":5,"text":"Application API","textPreview":"Application API","textChars":15,"textLines":1,"bbox":[310,218,170,45]}
-{"kind":"shape","id":"sh/ehsne1cv","slide":5,"bbox":[494,226,31,20]}
-{"kind":"shape","id":"sh/9836tgbi","slide":5,"bbox":[535,205,190,72]}
-{"kind":"textbox","id":"sh/o7u5kbux","slide":5,"text":"PostgreSQL","textPreview":"PostgreSQL","textChars":10,"textLines":1,"bbox":[545,218,170,45]}
-{"kind":"shape","id":"sh/n6lor6ts","slide":5,"bbox":[729,226,31,20]}
-{"kind":"shape","id":"sh/m5cni1c7","slide":5,"bbox":[780,205,190,72]}
-{"kind":"textbox","id":"sh/pczmhcbe","slide":5,"text":"Socket.IO","textPreview":"Socket.IO","textChars":9,"textLines":1,"bbox":[790,218,170,45]}
-{"kind":"shape","id":"sh/4bq587ut","slide":5,"bbox":[974,226,31,20]}
-{"kind":"shape","id":"sh/g7exkb61","slide":5,"bbox":[1015,205,190,72]}
-{"kind":"textbox","id":"sh/hsnedgnm","slide":5,"text":"Owner screens","textPreview":"Owner screens","textChars":13,"textLines":1,"bbox":[1025,218,170,45]}
-{"kind":"textbox","id":"sh/u5wvi1ov","slide":5,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[75,325,38,38]}
-{"kind":"textbox","id":"sh/f65wb65g","slide":5,"text":"Click Call Next Patient","textPreview":"Click Call Next Patient","textChars":23,"textLines":1,"bbox":[130,323,315,40]}
-{"kind":"textbox","id":"sh/4vexov6x","slide":5,"text":"Staff sends an HTTP request","textPreview":"Staff sends an HTTP request","textChars":27,"textLines":1,"bbox":[460,323,690,40]}
-{"kind":"textbox","id":"sh/pw7ehgni","slide":5,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[75,383,38,38]}
-{"kind":"textbox","id":"sh/2twfmlor","slide":5,"text":"Validate and advance","textPreview":"Validate and advance","textChars":20,"textLines":1,"bbox":[130,381,315,40]}
-{"kind":"textbox","id":"sh/3u5wfq5c","slide":5,"text":"Server completes the old turn and calls the next","textPreview":"Server completes the old turn and calls the next","textChars":48,"textLines":1,"bbox":[460,381,690,40]}
-{"kind":"textbox","id":"sh/czyxsv69","slide":5,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[75,441,38,38]}
-{"kind":"textbox","id":"sh/d07el0ne","slide":5,"text":"Save new queue state","textPreview":"Save new queue state","textChars":20,"textLines":1,"bbox":[130,439,315,40]}
-{"kind":"textbox","id":"sh/nu90bupw","slide":5,"text":"Database stores current number and statuses","textPreview":"Database stores current number and statuses","textChars":43,"textLines":1,"bbox":[460,439,690,40]}
-{"kind":"textbox","id":"sh/mt0zip8b","slide":5,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[75,499,38,38]}
-{"kind":"textbox","id":"sh/9wbid47m","slide":5,"text":"Broadcast queue update","textPreview":"Broadcast queue update","textChars":22,"textLines":1,"bbox":[130,497,315,40]}
-{"kind":"textbox","id":"sh/ov2hkzqh","slide":5,"text":"Socket.IO sends an event to connected clients","textPreview":"Socket.IO sends an event to connected clients","textChars":45,"textLines":1,"bbox":[460,497,690,40]}
-{"kind":"textbox","id":"sh/zq9g7upk","slide":5,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[75,557,38,38]}
-{"kind":"textbox","id":"sh/ep0zep8z","slide":5,"text":"Update the interface","textPreview":"Update the interface","textChars":20,"textLines":1,"bbox":[130,555,315,40]}
-{"kind":"textbox","id":"sh/1sry9k7q","slide":5,"text":"Each owner screen displays the new information","textPreview":"Each owner screen displays the new information","textChars":46,"textLines":1,"bbox":[460,555,690,40]}
-{"kind":"notes","id":"nt/u684dv","slide":5,"text":"The key flow begins when staff click Call Next Patient. The browser sends the action to the application API. The server validates the staff account, completes the previous turn, and advances the next waiting entry. PostgreSQL saves the new state. Socket.IO then broadcasts a queue update. Every connected owner screen handles that event and updates the displayed current number, patient count, and status without a manual refresh."}
-{"kind":"slide","id":"sl/uygz05","slide":6,"title":"06","textShapes":7}
-{"kind":"shape","id":"sh/u90vutsf","slide":6,"bbox":[0,0,18,720]}
-{"kind":"textbox","id":"sh/hcru58r6","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
-{"kind":"textbox","id":"sh/wbidw3al","slide":6,"text":"System architecture","textPreview":"System architecture","textChars":19,"textLines":1,"bbox":[52,64,1120,60]}
-{"kind":"textbox","id":"sh/jetw7i9w","slide":6,"text":"Users, client portals, clinic services, live queue updates, and persistent storage","textPreview":"Users, client portals, clinic services, live queue updates, and persistent storage","textChars":82,"textLines":1,"bbox":[54,120,1110,34]}
-{"kind":"shape","id":"sh/id0vydsb","slide":6,"bbox":[52,162,1168,0]}
-{"kind":"textbox","id":"sh/5gbe98r2","slide":6,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
-{"kind":"textbox","id":"sh/4f2d0nah","slide":6,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
-{"kind":"shape","id":"sh/zipcve9s","slide":6,"bbox":[52,190,1176,330]}
-{"kind":"shape","id":"sh/8fe9cnud","slide":6,"bbox":[155,556,970,0]}
-{"kind":"textbox","id":"sh/9g7qlsby","slide":6,"text":"Pet owners, doctors, and clinic staff use dedicated portals connected to one application API.","textPreview":"Pet owners, doctors, and clinic staff use dedicated portals connected to one application API.","textChars":93,"textLines":1,"bbox":[130,570,1020,32]}
-{"kind":"textbox","id":"sh/mdwraxcn","slide":6,"text":"Queue changes pass through clinic services, update the database, and reach connected owner screens through the live queue channel.","textPreview":"Queue changes pass through clinic services, update the database, and reach connected owner screens through the live queue channel.","textChars":130,"textLines":1,"bbox":[115,608,1050,43]}
-{"kind":"image","id":"im/va1gva50","slide":6,"name":"","alt":"Veterinary clinic system architecture showing users, client applications, application API, clinic services, live queue updates, and clinic database","bbox":[60,198,1160,314]}
-{"kind":"notes","id":"nt/uygz05","slide":6,"text":"This architecture begins with three users: pet owners, doctors, and clinic staff. Each role uses a dedicated client portal. The portals send requests to one application API, which validates the request and coordinates clinic operations. Accounts and pet data, consultations and medical records, billing, and the visit queue sit inside the clinic services layer. When clinic staff change the visit queue, the server saves the new state in the clinic database. The live queue update channel then notifies connected pet-owner screens so their queue status changes without a manual refresh. Socket.IO provides that persistent channel and can broadcast each queue event to every client in the relevant clinic or department room."}
-{"kind":"slide","id":"sl/u2tniz","slide":7,"title":"07","textShapes":22}
-{"kind":"shape","id":"sh/w72p832l","slide":7,"bbox":[0,0,18,720]}
-{"kind":"textbox","id":"sh/v69ozyl0","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
-{"kind":"textbox","id":"sh/u5076tkf","slide":7,"text":"Socket.IO event design","textPreview":"Socket.IO event design","textChars":22,"textLines":1,"bbox":[52,64,1120,60]}
-{"kind":"textbox","id":"sh/94r6xo3u","slide":7,"text":"The proposed event carries the queue information needed by the owner screen","textPreview":"The proposed event carries the queue information needed by the owner screen","textChars":75,"textLines":1,"bbox":[54,120,1110,34]}
-{"kind":"shape","id":"sh/83ip4j29","slide":7,"bbox":[52,162,1168,0]}
-{"kind":"textbox","id":"sh/729ovelo","slide":7,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
-{"kind":"textbox","id":"sh/m10729k3","slide":7,"text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
-{"kind":"shape","id":"sh/lgr6t43y","slide":7,"bbox":[70,205,540,355]}
-{"kind":"textbox","id":"sh/kfy50j2d","slide":7,"text":"queue:update","textPreview":"queue:update","textChars":12,"textLines":1,"bbox":[100,226,480,38]}
-{"kind":"textbox","id":"sh/6dgbq90n","slide":7,"text":"{\n  \"department\": \"general\",\n  \"currentQueueNumber\": \"A014\",\n  \"patientsAhead\": 2,\n  \"status\": \"WAITING\",\n  \"updatedAt\": \"...\"\n}","textPreview":"{ |   \"department\": \"general\", |   \"currentQueueNumber\": \"A014\", |   \"patientsAhead\": 2, |   \"status\": \"WAITING\", |   \"updatedAt\": \"...\" | }","textChars":128,"textLines":7,"bbox":[105,275,460,225]}
-{"kind":"textbox","id":"sh/7epczu18","slide":7,"text":"Sent after check-in, call-next, or cancellation","textPreview":"Sent after check-in, call-next, or cancellation","textChars":47,"textLines":1,"bbox":[105,510,460,30]}
-{"kind":"textbox","id":"sh/szytszid","slide":7,"text":"Design decisions","textPreview":"Design decisions","textChars":16,"textLines":1,"bbox":[690,205,430,38]}
-{"kind":"textbox","id":"sh/t0ru14jy","slide":7,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[690,270,38,38]}
-{"kind":"textbox","id":"sh/i9gbmp0b","slide":7,"text":"Broadcast","textPreview":"Broadcast","textChars":9,"textLines":1,"bbox":[745,265,180,26]}
-{"kind":"textbox","id":"sh/japsvu1w","slide":7,"text":"Send to all clients in the correct room","textPreview":"Send to all clients in the correct room","textChars":39,"textLines":1,"bbox":[745,294,425,42]}
-{"kind":"textbox","id":"sh/kbytozih","slide":7,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[690,352,38,38]}
-{"kind":"textbox","id":"sh/5c7ax4j2","slide":7,"text":"Privacy","textPreview":"Privacy","textChars":7,"textLines":1,"bbox":[745,347,180,26]}
-{"kind":"textbox","id":"sh/a5wbip0f","slide":7,"text":"Exclude unnecessary owner and pet details","textPreview":"Exclude unnecessary owner and pet details","textChars":41,"textLines":1,"bbox":[745,376,425,42]}
-{"kind":"textbox","id":"sh/v65sra10","slide":7,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[690,434,38,38]}
-{"kind":"textbox","id":"sh/zal8zqhs","slide":7,"text":"Recovery","textPreview":"Recovery","textChars":8,"textLines":1,"bbox":[745,429,180,26]}
-{"kind":"textbox","id":"sh/y9s7qlg7","slide":7,"text":"Reconnect and resynchronize after disconnection","textPreview":"Reconnect and resynchronize after disconnection","textChars":47,"textLines":1,"bbox":[745,458,425,42]}
-{"kind":"textbox","id":"sh/lc3q1gzi","slide":7,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[690,516,38,38]}
-{"kind":"textbox","id":"sh/0bu9sbyd","slide":7,"text":"Consistency","textPreview":"Consistency","textChars":11,"textLines":1,"bbox":[745,511,180,26]}
-{"kind":"textbox","id":"sh/nel83qho","slide":7,"text":"Emit only after the database update succeeds","textPreview":"Emit only after the database update succeeds","textChars":44,"textLines":1,"bbox":[745,540,425,42]}
-{"kind":"shape","id":"sh/mdcrulg3","slide":7,"bbox":[690,610,475,42]}
-{"kind":"textbox","id":"sh/9g3q50zu","slide":7,"text":"Prototype today: queue:updated signal followed by a fresh REST snapshot","textPreview":"Prototype today: queue:updated signal followed by a fresh REST snapshot","textChars":71,"textLines":1,"bbox":[705,615,445,30]}
-{"kind":"notes","id":"nt/u2tniz","slide":7,"text":"This slide shows the proposed event contract. The event can include the department, current queue number, patients ahead, status, and update time. The server sends it after check-in, call-next, or cancellation. It broadcasts to the appropriate room, excludes unnecessary personal details, reconnects after network loss, and emits only after the database update succeeds. Our runnable prototype currently sends a smaller queue updated signal and then fetches a fresh REST snapshot. That prototype proves the live channel while the proposal defines the richer final event."}
-{"kind":"slide","id":"sl/k6h845","slide":8,"title":"08","textShapes":25}
-{"kind":"shape","id":"sh/k7id4r21","slide":8,"bbox":[0,0,18,720]}
-{"kind":"textbox","id":"sh/z69wvm1g","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
-{"kind":"textbox","id":"sh/y50v2hkv","slide":8,"text":"Implementation plan and runnable proof","textPreview":"Implementation plan and runnable proof","textChars":38,"textLines":1,"bbox":[52,64,1120,60]}
-{"kind":"textbox","id":"sh/dkretcja","slide":8,"text":"The prototype proves live delivery; the proposal adds richer events and department rooms","textPreview":"The prototype proves live delivery; the proposal adds richer events and department rooms","textChars":88,"textLines":1,"bbox":[54,120,1110,34]}
-{"kind":"shape","id":"sh/cjid072p","slide":8,"bbox":[52,162,1168,0]}
-{"kind":"textbox","id":"sh/bi9wr214","slide":8,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
-{"kind":"textbox","id":"sh/qh0vyhkz","slide":8,"text":"8","textPreview":"8","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
-{"kind":"textbox","id":"sh/pg7epcje","slide":8,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[72,205,55,36]}
-{"kind":"shape","id":"sh/ofydw72t","slide":8,"bbox":[132,223,52,0]}
-{"kind":"textbox","id":"sh/it87apg3","slide":8,"text":"Queue state","textPreview":"Queue state","textChars":11,"textLines":1,"bbox":[202,205,190,36]}
-{"kind":"textbox","id":"sh/3uho3uho","slide":8,"text":"Keep ordered WAITING, SERVING, and COMPLETED entries","textPreview":"Keep ordered WAITING, SERVING, and COMPLETED entries","textChars":52,"textLines":1,"bbox":[405,205,340,42]}
-{"kind":"textbox","id":"sh/4vqpcfy9","slide":8,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[72,297,55,36]}
-{"kind":"shape","id":"sh/5wz65kzu","slide":8,"bbox":[132,315,52,0]}
-{"kind":"textbox","id":"sh/upon65g7","slide":8,"text":"Socket server","textPreview":"Socket server","textChars":13,"textLines":1,"bbox":[202,297,190,36]}
-{"kind":"textbox","id":"sh/vqhozahs","slide":8,"text":"Attach Socket.IO and create queue rooms","textPreview":"Attach Socket.IO and create queue rooms","textChars":39,"textLines":1,"bbox":[405,297,340,42]}
-{"kind":"textbox","id":"sh/grqp8fyd","slide":8,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[72,389,55,36]}
-{"kind":"shape","id":"sh/hsz61kzi","slide":8,"bbox":[132,407,52,0]}
-{"kind":"textbox","id":"sh/6lon25gv","slide":8,"text":"Event contract","textPreview":"Event contract","textChars":14,"textLines":1,"bbox":[202,389,190,36]}
-{"kind":"textbox","id":"sh/7mxovahg","slide":8,"text":"Broadcast current number, count, and status","textPreview":"Broadcast current number, count, and status","textChars":43,"textLines":1,"bbox":[405,389,340,42]}
-{"kind":"textbox","id":"sh/b6d436x8","slide":8,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[72,481,55,36]}
-{"kind":"shape","id":"sh/a5k3a1wn","slide":8,"bbox":[132,499,52,0]}
-{"kind":"textbox","id":"sh/xsvm5wfe","slide":8,"text":"Owner screen","textPreview":"Owner screen","textChars":12,"textLines":1,"bbox":[202,481,190,36]}
-{"kind":"textbox","id":"sh/wrmlcret","slide":8,"text":"Update immediately and resync after reconnect","textPreview":"Update immediately and resync after reconnect","textChars":45,"textLines":1,"bbox":[405,481,340,42]}
-{"kind":"shape","id":"sh/jud476xk","slide":8,"bbox":[775,190,410,400]}
-{"kind":"textbox","id":"sh/yt43e1wz","slide":8,"text":"RUNNABLE PROOF","textPreview":"RUNNABLE PROOF","textChars":14,"textLines":1,"bbox":[810,215,340,30]}
-{"kind":"textbox","id":"sh/lwvm9gfa","slide":8,"text":"Backend","textPreview":"Backend","textChars":7,"textLines":1,"bbox":[810,266,150,28]}
-{"kind":"textbox","id":"sh/kvmlgbe5","slide":8,"text":"npm run db:migrate\nnpm run dev","textPreview":"npm run db:migrate | npm run dev","textChars":30,"textLines":2,"bbox":[810,300,330,66]}
-{"kind":"textbox","id":"sh/zy9kvmx0","slide":8,"text":"Frontend","textPreview":"Frontend","textChars":8,"textLines":1,"bbox":[810,390,150,28]}
-{"kind":"textbox","id":"sh/ex032hwf","slide":8,"text":"npm run dev","textPreview":"npm run dev","textChars":11,"textLines":1,"bbox":[810,424,330,34]}
-{"kind":"textbox","id":"sh/43y1cnud","slide":8,"text":"Verification","textPreview":"Verification","textChars":12,"textLines":1,"bbox":[810,500,150,28]}
-{"kind":"textbox","id":"sh/p47i58vy","slide":8,"text":"npm run build\nqueue integration test","textPreview":"npm run build | queue integration test","textChars":36,"textLines":2,"bbox":[810,534,330,58]}
-{"kind":"shape","id":"sh/21gjadc7","slide":8,"bbox":[75,605,1075,45]}
-{"kind":"textbox","id":"sh/32p03ids","slide":8,"text":"Runnable proof demonstrates check-in, call-next, cancellation, reconnection, and live screen refresh","textPreview":"Runnable proof demonstrates check-in, call-next, cancellation, reconnection, and live screen refresh","textChars":100,"textLines":1,"bbox":[95,612,1035,28]}
-{"kind":"notes","id":"nt/k6h845","slide":8,"text":"The implementation plan starts with reliable queue states, then attaches Socket.IO, defines the event contract, and updates the owner interface. The current runnable proof already demonstrates the key behavior: check-in, call-next, cancellation, automatic reconnection, and screen updates without a manual refresh. The next proposal step is to include the richer queue payload and introduce rooms for separate clinics or departments."}
-{"kind":"slide","id":"sl/i1y2mw","slide":9,"title":"09","textShapes":10}
-{"kind":"shape","id":"sh/lwjuto3u","slide":9,"bbox":[0,0,18,720]}
-{"kind":"textbox","id":"sh/ytsbitk3","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
-{"kind":"textbox","id":"sh/ju1crylo","slide":9,"text":"Live demonstration and testing","textPreview":"Live demonstration and testing","textChars":30,"textLines":1,"bbox":[52,64,1120,60]}
-{"kind":"textbox","id":"sh/8zato325","slide":9,"text":"Two browser windows show the same queue changing in real time","textPreview":"Two browser windows show the same queue changing in real time","textChars":61,"textLines":1,"bbox":[54,120,1110,34]}
-{"kind":"shape","id":"sh/t03ux83q","slide":9,"bbox":[52,162,1168,0]}
-{"kind":"textbox","id":"sh/6xsbmtkf","slide":9,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
-{"kind":"textbox","id":"sh/7y1cvyl0","slide":9,"text":"9","textPreview":"9","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
-{"kind":"shape","id":"sh/o3qtcj21","slide":9,"bbox":[65,195,545,410]}
-{"kind":"textbox","id":"sh/94zal43m","slide":9,"text":"PET OWNER WINDOW","textPreview":"PET OWNER WINDOW","textChars":16,"textLines":1,"bbox":[95,218,485,30]}
-{"kind":"textbox","id":"sh/hwbih0vq","slide":9,"text":"1  Select a registered pet\n\n2  Click Check In\n\n3  Read queue number and patients ahead\n\n4  Keep this screen open without refreshing","textPreview":"1  Select a registered pet |  | 2  Click Check In |  | 3  Read queue number and patients ahead |  | 4  Keep this screen open without refr...","textChars":131,"textLines":7,"bbox":[110,280,455,255]}
-{"kind":"shape","id":"sh/wv2hove5","slide":9,"bbox":[670,195,545,410]}
-{"kind":"textbox","id":"sh/va90fqdk","slide":9,"text":"STAFF WINDOW","textPreview":"STAFF WINDOW","textChars":12,"textLines":1,"bbox":[700,218,485,30]}
-{"kind":"textbox","id":"sh/u90zmlwz","slide":9,"text":"1  Confirm the waiting entry appears\n\n2  Click Call Next Patient\n\n3  Watch the owner screen change automatically\n\n4  Test reconnection and cancellation","textPreview":"1  Confirm the waiting entry appears |  | 2  Click Call Next Patient |  | 3  Watch the owner screen change automatically |  | 4  Test rec...","textChars":151,"textLines":7,"bbox":[715,280,455,255]}
-{"kind":"shape","id":"sh/50bil0v2","slide":9,"bbox":[210,625,860,40]}
-{"kind":"textbox","id":"sh/4z21sveh","slide":9,"text":"Proof point: the owner page changes while no one presses Refresh","textPreview":"Proof point: the owner page changes while no one presses Refresh","textChars":64,"textLines":1,"bbox":[230,631,820,27]}
-{"kind":"notes","id":"nt/i1y2mw","slide":9,"text":"For the live demonstration, I will open the pet-owner and staff pages in separate windows. The owner checks in a registered pet and receives a queue number. I leave that screen open without pressing Refresh. On the staff page, I confirm the waiting entry and click Call Next Patient. The owner screen changes automatically to show the new current number and status. I can briefly disconnect and reconnect to show Socket.IO recovery, then check in another pet and cancel it. The main proof is visible: a staff action changes every connected owner screen without manual refresh."}
-{"kind":"slide","id":"sl/jc12nl","slide":10,"title":"THANK YOU","textShapes":12}
-{"kind":"textbox","id":"sh/sf2xkjil","slide":10,"text":"THANK YOU","textPreview":"THANK YOU","textChars":9,"textLines":1,"bbox":[100,130,1080,80]}
-{"kind":"textbox","id":"sh/7etwreh0","slide":10,"text":"Real-time queue visibility for pet owners and clinic staff","textPreview":"Real-time queue visibility for pet owners and clinic staff","textChars":58,"textLines":1,"bbox":[180,235,920,46]}
-{"kind":"shape","id":"sh/6dkvit0f","slide":10,"bbox":[420,318,440,0]}
-{"kind":"textbox","id":"sh/lcbepozu","slide":10,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[263,382,62,62]}
-{"kind":"textbox","id":"sh/kb2dgjip","slide":10,"text":"Staff action","textPreview":"Staff action","textChars":12,"textLines":1,"bbox":[155,462,278,34]}
-{"kind":"textbox","id":"sh/jatwneh4","slide":10,"text":"changes the queue","textPreview":"changes the queue","textChars":17,"textLines":1,"bbox":[155,502,278,50]}
-{"kind":"textbox","id":"sh/y9kve90j","slide":10,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[593,382,62,62]}
-{"kind":"textbox","id":"sh/x8rel4zy","slide":10,"text":"Socket.IO","textPreview":"Socket.IO","textChars":9,"textLines":1,"bbox":[485,462,278,34]}
-{"kind":"textbox","id":"sh/wnidczid","slide":10,"text":"broadcasts the update","textPreview":"broadcasts the update","textChars":21,"textLines":1,"bbox":[485,502,278,50]}
-{"kind":"textbox","id":"sh/ed8vypkf","slide":10,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[923,382,62,62]}
-{"kind":"textbox","id":"sh/fe1c7u10","slide":10,"text":"Owner screen","textPreview":"Owner screen","textChars":12,"textLines":1,"bbox":[815,462,278,34]}
-{"kind":"textbox","id":"sh/gfad0z2l","slide":10,"text":"changes without refresh","textPreview":"changes without refresh","textChars":23,"textLines":1,"bbox":[815,502,278,50]}
-{"kind":"textbox","id":"sh/1gju94jq","slide":10,"text":"Questions?","textPreview":"Questions?","textChars":10,"textLines":1,"bbox":[100,630,1080,45]}
-{"kind":"notes","id":"nt/jc12nl","slide":10,"text":"To conclude, our proposal connects one staff action to every relevant pet-owner screen. The server updates the queue, Socket.IO broadcasts the change, and the owner interface changes without a refresh. This reduces uncertainty for owners and repeated questions for clinic staff. Thank you. I am happy to answer any questions."}
+{"kind":"deck","id":"pr/ae8gnv","name":"Deck"}
+{"kind":"layout","layoutId":"3d86d274-50cc-4282-8fa2-ad08aa2dea99","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"8c8f2b7a-2acd-4e77-b11b-f49d154dd6cf","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/6zbvdi","slide":1,"title":"REAL-TIME","textShapes":8}
+{"kind":"shape","id":"sh/v2porq1c","slide":1,"bbox":[890,-170,560,560]}
+{"kind":"shape","id":"sh/w3ypkvih","slide":1,"bbox":[1000,350,380,380]}
+{"kind":"textbox","id":"sh/x476t0j2","slide":1,"text":"REAL-TIME","textPreview":"REAL-TIME","textChars":9,"textLines":1,"bbox":[70,95,600,58]}
+{"kind":"textbox","id":"sh/ipg7m50n","slide":1,"text":"Veterinary Clinic\nQueue Management","textPreview":"Veterinary Clinic | Queue Management","textChars":34,"textLines":2,"bbox":[70,148,760,160]}
+{"kind":"textbox","id":"sh/jqpova18","slide":1,"text":"WebSocket and Socket.IO","textPreview":"WebSocket and Socket.IO","textChars":23,"textLines":1,"bbox":[74,327,620,48]}
+{"kind":"shape","id":"sh/4ripofit","slide":1,"bbox":[74,407,525,0]}
+{"kind":"textbox","id":"sh/5sr6xkje","slide":1,"text":"A live queue that keeps pet owners and clinic staff in sync","textPreview":"A live queue that keeps pet owners and clinic staff in sync","textChars":59,"textLines":1,"bbox":[74,430,610,70]}
+{"kind":"textbox","id":"sh/6t07q50z","slide":1,"text":"A001","textPreview":"A001","textChars":4,"textLines":1,"bbox":[865,250,118,118]}
+{"kind":"textbox","id":"sh/ru9oza1k","slide":1,"text":"A002","textPreview":"A002","textChars":4,"textLines":1,"bbox":[995,353,102,102]}
+{"kind":"textbox","id":"sh/7a9gf65s","slide":1,"text":"A003","textPreview":"A003","textChars":4,"textLines":1,"bbox":[1080,185,92,92]}
+{"kind":"textbox","id":"sh/mpgzm1o7","slide":1,"text":"10-minute presentation and live demo","textPreview":"10-minute presentation and live demo","textChars":36,"textLines":1,"bbox":[74,632,500,30]}
+{"kind":"notes","id":"nt/6zbvdi","slide":1,"text":"Good morning. Today I will present our proposal for a real-time veterinary clinic queue management system. In the current queue experience, pet owners must refresh the page or ask staff for updates. Our proposed change uses WebSocket and Socket.IO so queue changes reach connected owner screens immediately. I will explain the problem, the proposed solution, the technical design, the implementation plan, and then show a short live demonstration."}
+{"kind":"slide","id":"sl/ayo53v","slide":2,"title":"02","textShapes":22}
+{"kind":"shape","id":"sh/ja9gbypc","slide":2,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/kbih43qx","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
+{"kind":"textbox","id":"sh/lcrydo72","slide":2,"text":"Agenda","textPreview":"Agenda","textChars":6,"textLines":1,"bbox":[52,64,1120,60]}
+{"kind":"textbox","id":"sh/6x0z6t8n","slide":2,"text":"Real-time veterinary clinic queue management","textPreview":"Real-time veterinary clinic queue management","textChars":44,"textLines":1,"bbox":[54,120,1110,34]}
+{"kind":"shape","id":"sh/7ytgfyp8","slide":2,"bbox":[52,162,1168,0]}
+{"kind":"textbox","id":"sh/8z2h83qt","slide":2,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
+{"kind":"textbox","id":"sh/t0byh87e","slide":2,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
+{"kind":"textbox","id":"sh/mhgfu98j","slide":2,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[80,205,58,44]}
+{"kind":"shape","id":"sh/n2pg3e94","slide":2,"bbox":[150,227,54,0]}
+{"kind":"textbox","id":"sh/jel0vqds","slide":2,"text":"Clinic queue problem","textPreview":"Clinic queue problem","textChars":20,"textLines":1,"bbox":[225,204,390,46]}
+{"kind":"textbox","id":"sh/ydcz2lw7","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[80,299,58,44]}
+{"kind":"shape","id":"sh/lg3ixgvi","slide":2,"bbox":[150,321,54,0]}
+{"kind":"textbox","id":"sh/kfuh4bed","slide":2,"text":"Proposed solution","textPreview":"Proposed solution","textChars":17,"textLines":1,"bbox":[225,298,390,46]}
+{"kind":"textbox","id":"sh/bal0r6dg","slide":2,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[80,393,58,44]}
+{"kind":"shape","id":"sh/a9czy1wv","slide":2,"bbox":[150,415,54,0]}
+{"kind":"textbox","id":"sh/xc3itgvm","slide":2,"text":"WebSocket and Socket.IO","textPreview":"WebSocket and Socket.IO","textChars":23,"textLines":1,"bbox":[225,392,390,46]}
+{"kind":"textbox","id":"sh/wbuh0be1","slide":2,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[80,487,58,44]}
+{"kind":"shape","id":"sh/nm1gn6dk","slide":2,"bbox":[150,509,54,0]}
+{"kind":"textbox","id":"sh/mlszu1wz","slide":2,"text":"Queue update flow","textPreview":"Queue update flow","textChars":17,"textLines":1,"bbox":[225,486,390,46]}
+{"kind":"textbox","id":"sh/qh8j61gr","slide":2,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[675,205,58,44]}
+{"kind":"shape","id":"sh/ri10fmxc","slide":2,"bbox":[745,227,54,0]}
+{"kind":"textbox","id":"sh/cja18ryx","slide":2,"text":"System architecture","textPreview":"System architecture","textChars":19,"textLines":1,"bbox":[820,204,390,46]}
+{"kind":"textbox","id":"sh/dkjihwfi","slide":2,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[675,299,58,44]}
+{"kind":"shape","id":"sh/elsja1g3","slide":2,"bbox":[745,321,54,0]}
+{"kind":"textbox","id":"sh/z610j6x8","slide":2,"text":"Socket.IO event design","textPreview":"Socket.IO event design","textChars":22,"textLines":1,"bbox":[820,298,390,46]}
+{"kind":"textbox","id":"sh/07a1cbyt","slide":2,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[675,393,58,44]}
+{"kind":"shape","id":"sh/18jilgfe","slide":2,"bbox":[745,415,54,0]}
+{"kind":"textbox","id":"sh/m9sjelgz","slide":2,"text":"Implementation plan","textPreview":"Implementation plan","textChars":19,"textLines":1,"bbox":[820,392,390,46]}
+{"kind":"textbox","id":"sh/nal0n6xk","slide":2,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[675,487,58,44]}
+{"kind":"shape","id":"sh/x4nmdkzm","slide":2,"bbox":[745,509,54,0]}
+{"kind":"textbox","id":"sh/w3el4fi1","slide":2,"text":"Live demonstration and testing","textPreview":"Live demonstration and testing","textChars":30,"textLines":1,"bbox":[820,486,390,46]}
+{"kind":"shape","id":"sh/b254bahg","slide":2,"bbox":[160,605,960,48]}
+{"kind":"textbox","id":"sh/a1w3250b","slide":2,"text":"The presentation ends with a runnable proof of automatic queue updates","textPreview":"The presentation ends with a runnable proof of automatic queue updates","textChars":70,"textLines":1,"bbox":[185,612,910,32]}
+{"kind":"notes","id":"nt/ayo53v","slide":2,"text":"Here is the presentation agenda. I will begin with the clinic queue problem and our proposed solution. I will then explain WebSocket and Socket.IO, the queue update flow, the system architecture, and the event design. After that, I will cover the implementation plan and finish with a live demonstration and testing."}
+{"kind":"slide","id":"sl/bynp6d","slide":3,"title":"03","textShapes":10}
+{"kind":"shape","id":"sh/t8r6tg7i","slide":3,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/65gny18r","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
+{"kind":"textbox","id":"sh/r6por6pc","slide":3,"text":"Clinic queue problem","textPreview":"Clinic queue problem","textChars":20,"textLines":1,"bbox":[52,64,1120,60]}
+{"kind":"textbox","id":"sh/43y5wbq1","slide":3,"text":"The current queue page does not update automatically","textPreview":"The current queue page does not update automatically","textChars":52,"textLines":1,"bbox":[54,120,1110,34]}
+{"kind":"shape","id":"sh/5476pg7m","slide":3,"bbox":[52,162,1168,0]}
+{"kind":"textbox","id":"sh/i1gnu18v","slide":3,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
+{"kind":"textbox","id":"sh/j2pon6pg","slide":3,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
+{"kind":"textbox","id":"sh/p0b6107q","slide":3,"text":"Owners need four answers","textPreview":"Owners need four answers","textChars":24,"textLines":1,"bbox":[70,205,370,34]}
+{"kind":"textbox","id":"sh/lgjelwbq","slide":3,"text":"• Which number is being served?\n• How many patients are ahead?\n• Is their turn approaching?\n• Has their appointment been called?","textPreview":"• Which number is being served? | • How many patients are ahead? | • Is their turn approaching? | • Has their appointment been called?","textChars":128,"textLines":4,"bbox":[70,248,510,180]}
+{"kind":"textbox","id":"sh/kfadsra5","slide":3,"text":"Current workaround","textPreview":"Current workaround","textChars":18,"textLines":1,"bbox":[70,450,250,34]}
+{"kind":"textbox","id":"sh/je1cjmtk","slide":3,"text":"Refresh the page repeatedly or ask clinic staff for an update.","textPreview":"Refresh the page repeatedly or ask clinic staff for an update.","textChars":62,"textLines":1,"bbox":[70,493,510,88]}
+{"kind":"shape","id":"sh/ydsvq1sz","slide":3,"bbox":[670,550,520,78]}
+{"kind":"textbox","id":"sh/xcjuhwbe","slide":3,"text":"Result: uncertainty, unnecessary waiting, and repeated questions for staff","textPreview":"Result: uncertainty, unnecessary waiting, and repeated questions for staff","textChars":74,"textLines":1,"bbox":[695,564,470,50]}
+{"kind":"image","id":"im/lw3ulgnq","slide":3,"name":"","geometry":"roundRect","alt":"PawEver pet owner dashboard","bbox":[670,198,520,330]}
+{"kind":"notes","id":"nt/bynp6d","slide":3,"text":"The current queue gives pet owners a number after check-in, but the information does not update automatically. Owners need to know which number staff are serving, how many patients are ahead, whether their turn is approaching, and whether staff have called their appointment. Today they must repeatedly refresh or ask clinic staff. This creates uncertainty, unnecessary waiting, and repeated questions that interrupt clinic work."}
+{"kind":"slide","id":"sl/1nubb1","slide":4,"title":"04","textShapes":22}
+{"kind":"shape","id":"sh/hwbu9oz2","slide":4,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/utkvyt0r","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
+{"kind":"textbox","id":"sh/futc7yhc","slide":4,"text":"Proposed solution","textPreview":"Proposed solution","textChars":17,"textLines":1,"bbox":[52,64,1120,60]}
+{"kind":"textbox","id":"sh/sr2dwjil","slide":4,"text":"Staff action triggers an immediate update on every connected owner screen","textPreview":"Staff action triggers an immediate update on every connected owner screen","textChars":73,"textLines":1,"bbox":[54,120,1110,34]}
+{"kind":"shape","id":"sh/tsbu5oz6","slide":4,"bbox":[52,162,1168,0]}
+{"kind":"textbox","id":"sh/65kvu90f","slide":4,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
+{"kind":"textbox","id":"sh/76tc3eh0","slide":4,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
+{"kind":"textbox","id":"sh/cnmd83ip","slide":4,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[142,205,64,64]}
+{"kind":"textbox","id":"sh/dofeh8za","slide":4,"text":"Owner checks in","textPreview":"Owner checks in","textChars":15,"textLines":1,"bbox":[64,285,220,35]}
+{"kind":"textbox","id":"sh/xkrqlgr2","slide":4,"text":"System assigns a queue number","textPreview":"System assigns a queue number","textChars":29,"textLines":1,"bbox":[64,327,220,75]}
+{"kind":"shape","id":"sh/wji9sbqh","slide":4,"bbox":[289,226,62,24]}
+{"kind":"textbox","id":"sh/bip8j69w","slide":4,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[442,205,64,64]}
+{"kind":"textbox","id":"sh/ahgrq18b","slide":4,"text":"Staff calls next","textPreview":"Staff calls next","textChars":16,"textLines":1,"bbox":[364,285,220,35]}
+{"kind":"textbox","id":"sh/9g7qhwrq","slide":4,"text":"Queue state changes on the server","textPreview":"Queue state changes on the server","textChars":33,"textLines":1,"bbox":[364,327,220,75]}
+{"kind":"shape","id":"sh/ofy9orq5","slide":4,"bbox":[589,226,62,24]}
+{"kind":"textbox","id":"sh/nup8fm90","slide":4,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[742,205,64,64]}
+{"kind":"textbox","id":"sh/mtgrm18f","slide":4,"text":"Server broadcasts","textPreview":"Server broadcasts","textChars":17,"textLines":1,"bbox":[664,285,220,35]}
+{"kind":"textbox","id":"sh/tcbat0ra","slide":4,"text":"Socket.IO sends the update","textPreview":"Socket.IO sends the update","textChars":26,"textLines":1,"bbox":[664,327,220,75]}
+{"kind":"shape","id":"sh/8b290vqp","slide":4,"bbox":[889,226,62,24]}
+{"kind":"textbox","id":"sh/s7alc32x","slide":4,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1042,205,64,64]}
+{"kind":"textbox","id":"sh/d832l8ji","slide":4,"text":"Screen changes","textPreview":"Screen changes","textChars":14,"textLines":1,"bbox":[964,285,220,35]}
+{"kind":"textbox","id":"sh/q5sjatk7","slide":4,"text":"Owners see the new state instantly","textPreview":"Owners see the new state instantly","textChars":34,"textLines":1,"bbox":[964,327,220,75]}
+{"kind":"shape","id":"sh/r61kjy1c","slide":4,"bbox":[140,455,1000,125]}
+{"kind":"textbox","id":"sh/43a18j21","slide":4,"text":"Before","textPreview":"Before","textChars":6,"textLines":1,"bbox":[180,478,250,32]}
+{"kind":"textbox","id":"sh/54j2hojm","slide":4,"text":"Refresh page or ask staff","textPreview":"Refresh page or ask staff","textChars":25,"textLines":1,"bbox":[165,516,280,38]}
+{"kind":"textbox","id":"sh/i1sj69kv","slide":4,"text":"No manual refresh","textPreview":"No manual refresh","textChars":17,"textLines":1,"bbox":[500,487,280,55]}
+{"kind":"textbox","id":"sh/321kfe1g","slide":4,"text":"After","textPreview":"After","textChars":5,"textLines":1,"bbox":[850,478,250,32]}
+{"kind":"textbox","id":"sh/gzq14j2p","slide":4,"text":"Current number, patients ahead, and call status update automatically","textPreview":"Current number, patients ahead, and call status update automatically","textChars":68,"textLines":1,"bbox":[820,510,310,55]}
+{"kind":"notes","id":"nt/1nubb1","slide":4,"text":"Our proposed solution adds a continuous real-time channel. The owner checks in and receives a queue number. When staff click Call Next Patient, the application updates the queue on the server. Socket.IO immediately broadcasts the new queue state to connected owner screens. The interface then shows the current number, patients ahead, and whether the pet has been called. The owner does not press Refresh."}
+{"kind":"slide","id":"sl/ad5dvy","slide":5,"title":"05","textShapes":12}
+{"kind":"shape","id":"sh/h47i54vu","slide":5,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/u1gzupc3","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
+{"kind":"textbox","id":"sh/v2p03udo","slide":5,"text":"Technology of interest","textPreview":"Technology of interest","textChars":22,"textLines":1,"bbox":[52,64,1120,60]}
+{"kind":"textbox","id":"sh/47ih0jul","slide":5,"text":"Socket.IO manages a persistent real-time channel between browser and server","textPreview":"Socket.IO manages a persistent real-time channel between browser and server","textChars":75,"textLines":1,"bbox":[54,120,1110,34]}
+{"kind":"shape","id":"sh/58ri9ovq","slide":5,"bbox":[52,162,1168,0]}
+{"kind":"textbox","id":"sh/i50zy9cf","slide":5,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
+{"kind":"textbox","id":"sh/36907ed0","slide":5,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
+{"kind":"shape","id":"sh/svih4juh","slide":5,"bbox":[74,205,500,350]}
+{"kind":"textbox","id":"sh/dwbidov2","slide":5,"text":"WebSocket","textPreview":"WebSocket","textChars":9,"textLines":1,"bbox":[104,235,440,50]}
+{"kind":"textbox","id":"sh/tk3it4fi","slide":5,"text":"A persistent, full-duplex connection","textPreview":"A persistent, full-duplex connection","textChars":36,"textLines":1,"bbox":[115,300,420,38]}
+{"kind":"shape","id":"sh/sjuhkzyx","slide":5,"bbox":[150,380,350,0]}
+{"kind":"textbox","id":"sh/ril0ruxc","slide":5,"text":"Browser and server can exchange messages without creating a new HTTP request for every update.","textPreview":"Browser and server can exchange messages without creating a new HTTP request for every update.","textChars":94,"textLines":1,"bbox":[115,411,420,96]}
+{"kind":"shape","id":"sh/6hczipg7","slide":5,"bbox":[706,205,500,350]}
+{"kind":"textbox","id":"sh/1onix4fu","slide":5,"text":"Socket.IO","textPreview":"Socket.IO","textChars":9,"textLines":1,"bbox":[736,235,440,50]}
+{"kind":"textbox","id":"sh/gnehozy9","slide":5,"text":"The real-time library used by PawEver","textPreview":"The real-time library used by PawEver","textChars":37,"textLines":1,"bbox":[747,300,420,38]}
+{"kind":"textbox","id":"sh/fml0vuxo","slide":5,"text":"Real-time event communication\nAutomatic connection handling\nBroadcasting to many users\nRooms for clinic departments\nReconnection support","textPreview":"Real-time event communication | Automatic connection handling | Broadcasting to many users | Rooms for clinic departments | Reconnection ...","textChars":136,"textLines":5,"bbox":[770,352,375,180]}
+{"kind":"shape","id":"sh/elczmpg3","slide":5,"bbox":[594,348,92,32]}
+{"kind":"textbox","id":"sh/hsjilkfa","slide":5,"text":"uses","textPreview":"uses","textChars":4,"textLines":1,"bbox":[609,310,60,24]}
+{"kind":"notes","id":"nt/ad5dvy","slide":5,"text":"WebSocket provides continuous two-way communication between a client and server. The connection stays open, so the server can send a queue change as soon as it happens. Socket.IO simplifies this work. It provides real-time events, automatic connection handling, broadcasting to multiple users, rooms that can separate clinic departments, and reconnection support. Our first proof can use one shared queue room. Department-specific rooms are part of the proposed extension."}
+{"kind":"slide","id":"sl/l7chzl","slide":6,"title":"06","textShapes":25}
+{"kind":"shape","id":"sh/mdg3m98n","slide":6,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/9gr2h47e","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
+{"kind":"textbox","id":"sh/8filozqt","slide":6,"text":"Queue update flow","textPreview":"Queue update flow","textChars":17,"textLines":1,"bbox":[52,64,1120,60]}
+{"kind":"textbox","id":"sh/zapkbupc","slide":6,"text":"One staff action reaches every connected pet-owner screen","textPreview":"One staff action reaches every connected pet-owner screen","textChars":57,"textLines":1,"bbox":[54,120,1110,34]}
+{"kind":"shape","id":"sh/ypg3ip8r","slide":6,"bbox":[52,162,1168,0]}
+{"kind":"textbox","id":"sh/lc72d47i","slide":6,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
+{"kind":"textbox","id":"sh/kbylkzqx","slide":6,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
+{"kind":"shape","id":"sh/j6t4nypg","slide":6,"bbox":[70,205,190,72]}
+{"kind":"textbox","id":"sh/il03ut8v","slide":6,"text":"Clinic staff","textPreview":"Clinic staff","textChars":12,"textLines":1,"bbox":[80,218,170,45]}
+{"kind":"shape","id":"sh/ofad0jyl","slide":6,"bbox":[264,226,31,20]}
+{"kind":"shape","id":"sh/pgju9of6","slide":6,"bbox":[300,205,190,72]}
+{"kind":"textbox","id":"sh/2tsvy9gf","slide":6,"text":"Application API","textPreview":"Application API","textChars":15,"textLines":1,"bbox":[310,218,170,45]}
+{"kind":"shape","id":"sh/nu1c7ex0","slide":6,"bbox":[494,226,31,20]}
+{"kind":"shape","id":"sh/0rqtwzy9","slide":6,"bbox":[535,205,190,72]}
+{"kind":"textbox","id":"sh/1szu54fu","slide":6,"text":"PostgreSQL","textPreview":"PostgreSQL","textChars":10,"textLines":1,"bbox":[545,218,170,45]}
+{"kind":"shape","id":"sh/ep8bu9gj","slide":6,"bbox":[729,226,31,20]}
+{"kind":"shape","id":"sh/fqhc3exo","slide":6,"bbox":[780,205,190,72]}
+{"kind":"textbox","id":"sh/snqtszyd","slide":6,"text":"Socket.IO","textPreview":"Socket.IO","textChars":9,"textLines":1,"bbox":[790,218,170,45]}
+{"kind":"shape","id":"sh/dozu14fy","slide":6,"bbox":[974,226,31,20]}
+{"kind":"shape","id":"sh/tkra507m","slide":6,"bbox":[1015,205,190,72]}
+{"kind":"textbox","id":"sh/sji9wvq1","slide":6,"text":"Owner screens","textPreview":"Owner screens","textChars":13,"textLines":1,"bbox":[1025,218,170,45]}
+{"kind":"textbox","id":"sh/7i9s3qpg","slide":6,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[75,325,38,38]}
+{"kind":"textbox","id":"sh/6hgrul8v","slide":6,"text":"Click Call Next Patient","textPreview":"Click Call Next Patient","textChars":23,"textLines":1,"bbox":[130,323,315,40]}
+{"kind":"textbox","id":"sh/lg7a1grq","slide":6,"text":"Staff sends an HTTP request","textPreview":"Staff sends an HTTP request","textChars":27,"textLines":1,"bbox":[460,323,690,40]}
+{"kind":"textbox","id":"sh/kfy9sbq5","slide":6,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[75,383,38,38]}
+{"kind":"textbox","id":"sh/jepsz69k","slide":6,"text":"Validate and advance","textPreview":"Validate and advance","textChars":20,"textLines":1,"bbox":[130,381,315,40]}
+{"kind":"textbox","id":"sh/ydgrq18z","slide":6,"text":"Server completes the old turn and calls the next","textPreview":"Server completes the old turn and calls the next","textChars":48,"textLines":1,"bbox":[460,381,690,40]}
+{"kind":"textbox","id":"sh/pcbadk7u","slide":6,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[75,441,38,38]}
+{"kind":"textbox","id":"sh/4b2t4fq9","slide":6,"text":"Save new queue state","textPreview":"Save new queue state","textChars":20,"textLines":1,"bbox":[130,439,315,40]}
+{"kind":"textbox","id":"sh/2lcfidkf","slide":6,"text":"Database stores current number and statuses","textPreview":"Database stores current number and statuses","textChars":43,"textLines":1,"bbox":[460,439,690,40]}
+{"kind":"textbox","id":"sh/nmlgbi10","slide":6,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[75,499,38,38]}
+{"kind":"textbox","id":"sh/onuhkn2l","slide":6,"text":"Broadcast queue update","textPreview":"Broadcast queue update","textChars":22,"textLines":1,"bbox":[130,497,315,40]}
+{"kind":"textbox","id":"sh/p83ydsj6","slide":6,"text":"Socket.IO sends an event to connected clients","textPreview":"Socket.IO sends an event to connected clients","textChars":45,"textLines":1,"bbox":[460,497,690,40]}
+{"kind":"textbox","id":"sh/ehsfetkj","slide":6,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[75,557,38,38]}
+{"kind":"textbox","id":"sh/fi1g7yl4","slide":6,"text":"Update the interface","textPreview":"Update the interface","textChars":20,"textLines":1,"bbox":[130,555,315,40]}
+{"kind":"textbox","id":"sh/0jaxg32p","slide":6,"text":"Each owner screen displays the new information","textPreview":"Each owner screen displays the new information","textChars":46,"textLines":1,"bbox":[460,555,690,40]}
+{"kind":"notes","id":"nt/l7chzl","slide":6,"text":"The key flow begins when staff click Call Next Patient. The browser sends the action to the application API. The server validates the staff account, completes the previous turn, and advances the next waiting entry. PostgreSQL saves the new state. Socket.IO then broadcasts a queue update. Every connected owner screen handles that event and updates the displayed current number, patient count, and status without a manual refresh."}
+{"kind":"slide","id":"sl/qphjfb","slide":7,"title":"07","textShapes":7}
+{"kind":"shape","id":"sh/f6lgnu9g","slide":7,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/g7uxgzq1","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
+{"kind":"textbox","id":"sh/183ypkrm","slide":7,"text":"System architecture","textPreview":"System architecture","textChars":19,"textLines":1,"bbox":[52,64,1120,60]}
+{"kind":"textbox","id":"sh/29cfip8r","slide":7,"text":"Users, client portals, clinic services, live queue updates, and persistent storage","textPreview":"Users, client portals, clinic services, live queue updates, and persistent storage","textChars":82,"textLines":1,"bbox":[54,120,1110,34]}
+{"kind":"shape","id":"sh/3algrupc","slide":7,"bbox":[52,162,1168,0]}
+{"kind":"textbox","id":"sh/obexkzqx","slide":7,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
+{"kind":"textbox","id":"sh/pcnyt47i","slide":7,"text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
+{"kind":"shape","id":"sh/idsf658n","slide":7,"bbox":[52,190,1176,330]}
+{"kind":"shape","id":"sh/ve1k36hc","slide":7,"bbox":[155,556,970,0]}
+{"kind":"textbox","id":"sh/udsju10r","slide":7,"text":"Pet owners, doctors, and clinic staff use dedicated portals connected to one application API.","textPreview":"Pet owners, doctors, and clinic staff use dedicated portals connected to one application API.","textChars":93,"textLines":1,"bbox":[130,570,1020,32]}
+{"kind":"textbox","id":"sh/hgj25gzi","slide":7,"text":"Queue changes pass through clinic services, update the database, and reach connected owner screens through the live queue channel.","textPreview":"Queue changes pass through clinic services, update the database, and reach connected owner screens through the live queue channel.","textChars":130,"textLines":1,"bbox":[115,608,1050,43]}
+{"kind":"image","id":"im/y14zud8v","slide":7,"name":"","alt":"Veterinary clinic system architecture showing users, client applications, application API, clinic services, live queue updates, and clinic database","bbox":[60,198,1160,314]}
+{"kind":"notes","id":"nt/qphjfb","slide":7,"text":"This architecture begins with three users: pet owners, doctors, and clinic staff. Each role uses a dedicated client portal. The portals send requests to one application API, which validates the request and coordinates clinic operations. Accounts and pet data, consultations and medical records, billing, and the visit queue sit inside the clinic services layer. When clinic staff change the visit queue, the server saves the new state in the clinic database. The live queue update channel then notifies connected pet-owner screens so their queue status changes without a manual refresh. Socket.IO provides that persistent channel and can broadcast each queue event to every client in the relevant clinic or department room."}
+{"kind":"slide","id":"sl/kyk900","slide":8,"title":"08","textShapes":22}
+{"kind":"shape","id":"sh/2h0zaxcz","slide":8,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/p4ri5cbq","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
+{"kind":"textbox","id":"sh/o3ihc7u5","slide":8,"text":"Socket.IO event design","textPreview":"Socket.IO event design","textChars":22,"textLines":1,"bbox":[52,64,1120,60]}
+{"kind":"textbox","id":"sh/b69072tw","slide":8,"text":"The proposed event carries the queue information needed by the owner screen","textPreview":"The proposed event carries the queue information needed by the owner screen","textChars":75,"textLines":1,"bbox":[54,120,1110,34]}
+{"kind":"shape","id":"sh/a50zexcb","slide":8,"bbox":[52,162,1168,0]}
+{"kind":"textbox","id":"sh/x8ri9cbm","slide":8,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
+{"kind":"textbox","id":"sh/c7ihg7uh","slide":8,"text":"8","textPreview":"8","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
+{"kind":"shape","id":"sh/rapgvidc","slide":8,"bbox":[70,205,540,355]}
+{"kind":"textbox","id":"sh/q9wz2dcr","slide":8,"text":"queue:update","textPreview":"queue:update","textChars":12,"textLines":1,"bbox":[100,226,480,38]}
+{"kind":"textbox","id":"sh/8nmh0bi1","slide":8,"text":"{\n  \"department\": \"general\",\n  \"currentQueueNumber\": \"A014\",\n  \"patientsAhead\": 2,\n  \"status\": \"WAITING\",\n  \"updatedAt\": \"...\"\n}","textPreview":"{ |   \"department\": \"general\", |   \"currentQueueNumber\": \"A014\", |   \"patientsAhead\": 2, |   \"status\": \"WAITING\", |   \"updatedAt\": \"...\" | }","textChars":128,"textLines":7,"bbox":[105,275,460,225]}
+{"kind":"textbox","id":"sh/9ofitgjm","slide":8,"text":"Sent after check-in, call-next, or cancellation","textPreview":"Sent after check-in, call-next, or cancellation","textChars":47,"textLines":1,"bbox":[105,510,460,30]}
+{"kind":"textbox","id":"sh/ml4zy10v","slide":8,"text":"Design decisions","textPreview":"Design decisions","textChars":16,"textLines":1,"bbox":[690,205,430,38]}
+{"kind":"textbox","id":"sh/nmd0r61g","slide":8,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[690,270,38,38]}
+{"kind":"textbox","id":"sh/wr6hobix","slide":8,"text":"Broadcast","textPreview":"Broadcast","textChars":9,"textLines":1,"bbox":[745,265,180,26]}
+{"kind":"textbox","id":"sh/xsfixgji","slide":8,"text":"Send to all clients in the correct room","textPreview":"Send to all clients in the correct room","textChars":39,"textLines":1,"bbox":[745,294,425,42]}
+{"kind":"textbox","id":"sh/apoz2l07","slide":8,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[690,352,38,38]}
+{"kind":"textbox","id":"sh/vqx0vq1c","slide":8,"text":"Privacy","textPreview":"Privacy","textChars":7,"textLines":1,"bbox":[745,347,180,26]}
+{"kind":"textbox","id":"sh/cv2hsrit","slide":8,"text":"Exclude unnecessary owner and pet details","textPreview":"Exclude unnecessary owner and pet details","textChars":41,"textLines":1,"bbox":[745,376,425,42]}
+{"kind":"textbox","id":"sh/dwbylwje","slide":8,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[690,434,38,38]}
+{"kind":"textbox","id":"sh/t0369o7q","slide":8,"text":"Recovery","textPreview":"Recovery","textChars":8,"textLines":1,"bbox":[745,429,180,26]}
+{"kind":"textbox","id":"sh/szap0jql","slide":8,"text":"Reconnect and resynchronize after disconnection","textPreview":"Reconnect and resynchronize after disconnection","textChars":47,"textLines":1,"bbox":[745,458,425,42]}
+{"kind":"textbox","id":"sh/7e1o7ep0","slide":8,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[690,516,38,38]}
+{"kind":"textbox","id":"sh/6dsny98f","slide":8,"text":"Consistency","textPreview":"Consistency","textChars":11,"textLines":1,"bbox":[745,511,180,26]}
+{"kind":"textbox","id":"sh/h436d872","slide":8,"text":"Emit only after the database update succeeds","textPreview":"Emit only after the database update succeeds","textChars":44,"textLines":1,"bbox":[745,540,425,42]}
+{"kind":"shape","id":"sh/g3up43qh","slide":8,"bbox":[690,610,475,42]}
+{"kind":"textbox","id":"sh/f2lobypw","slide":8,"text":"Prototype today: queue:updated signal followed by a fresh REST snapshot","textPreview":"Prototype today: queue:updated signal followed by a fresh REST snapshot","textChars":71,"textLines":1,"bbox":[705,615,445,30]}
+{"kind":"notes","id":"nt/kyk900","slide":8,"text":"This slide shows the proposed event contract. The event can include the department, current queue number, patients ahead, status, and update time. The server sends it after check-in, call-next, or cancellation. It broadcasts to the appropriate room, excludes unnecessary personal details, reconnects after network loss, and emits only after the database update succeeds. Our runnable prototype currently sends a smaller queue updated signal and then fetches a fresh REST snapshot. That prototype proves the live channel while the proposal defines the richer final event."}
+{"kind":"slide","id":"sl/aaxxbv","slide":9,"title":"09","textShapes":25}
+{"kind":"shape","id":"sh/4ry5k7mp","slide":9,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/3qp4r254","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
+{"kind":"textbox","id":"sh/ipgnix4z","slide":9,"text":"Implementation plan and runnable proof","textPreview":"Implementation plan and runnable proof","textChars":38,"textLines":1,"bbox":[52,64,1120,60]}
+{"kind":"textbox","id":"sh/dgr6xw3m","slide":9,"text":"The prototype proves live delivery; the proposal adds richer events and department rooms","textPreview":"The prototype proves live delivery; the proposal adds richer events and department rooms","textChars":88,"textLines":1,"bbox":[54,120,1110,34]}
+{"kind":"shape","id":"sh/svi5orm1","slide":9,"bbox":[52,162,1168,0]}
+{"kind":"textbox","id":"sh/rup4vmlg","slide":9,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
+{"kind":"textbox","id":"sh/qtgnmh4v","slide":9,"text":"9","textPreview":"9","textChars":1,"textLines":1,"bbox":[1180,683,40,18]}
+{"kind":"textbox","id":"sh/tknmlsn2","slide":9,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[72,205,55,36]}
+{"kind":"shape","id":"sh/8ze5cnmh","slide":9,"bbox":[132,223,52,0]}
+{"kind":"textbox","id":"sh/a9o3e9gf","slide":9,"text":"Queue state","textPreview":"Queue state","textChars":11,"textLines":1,"bbox":[202,205,190,36]}
+{"kind":"textbox","id":"sh/vaxk7ex0","slide":9,"text":"Keep ordered WAITING, SERVING, and COMPLETED entries","textPreview":"Keep ordered WAITING, SERVING, and COMPLETED entries","textChars":52,"textLines":1,"bbox":[405,205,340,42]}
+{"kind":"textbox","id":"sh/wb6lgjyl","slide":9,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[72,297,55,36]}
+{"kind":"shape","id":"sh/xcf29of6","slide":9,"bbox":[132,315,52,0]}
+{"kind":"textbox","id":"sh/id83itgb","slide":9,"text":"Socket server","textPreview":"Socket server","textChars":13,"textLines":1,"bbox":[202,297,190,36]}
+{"kind":"textbox","id":"sh/jehkbyxw","slide":9,"text":"Attach Socket.IO and create queue rooms","textPreview":"Attach Socket.IO and create queue rooms","textChars":39,"textLines":1,"bbox":[405,297,340,42]}
+{"kind":"textbox","id":"sh/kfqlk3yh","slide":9,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[72,389,55,36]}
+{"kind":"shape","id":"sh/5gz2d8f2","slide":9,"bbox":[132,407,52,0]}
+{"kind":"textbox","id":"sh/6183mtgn","slide":9,"text":"Event contract","textPreview":"Event contract","textChars":14,"textLines":1,"bbox":[202,389,190,36]}
+{"kind":"textbox","id":"sh/72hkfyx8","slide":9,"text":"Broadcast current number, count, and status","textPreview":"Broadcast current number, count, and status","textChars":43,"textLines":1,"bbox":[405,389,340,42]}
+{"kind":"textbox","id":"sh/361k3yd0","slide":9,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[72,481,55,36]}
+{"kind":"shape","id":"sh/25sjudcv","slide":9,"bbox":[132,499,52,0]}
+{"kind":"textbox","id":"sh/p8j258v6","slide":9,"text":"Owner screen","textPreview":"Owner screen","textChars":12,"textLines":1,"bbox":[202,481,190,36]}
+{"kind":"textbox","id":"sh/o7a1w3ul","slide":9,"text":"Update immediately and resync after reconnect","textPreview":"Update immediately and resync after reconnect","textChars":45,"textLines":1,"bbox":[405,481,340,42]}
+{"kind":"shape","id":"sh/fihkzyd4","slide":9,"bbox":[775,190,410,400]}
+{"kind":"textbox","id":"sh/uh8jqtcj","slide":9,"text":"RUNNABLE PROOF","textPreview":"RUNNABLE PROOF","textChars":14,"textLines":1,"bbox":[810,215,340,30]}
+{"kind":"textbox","id":"sh/14z218va","slide":9,"text":"Backend","textPreview":"Backend","textChars":7,"textLines":1,"bbox":[810,266,150,28]}
+{"kind":"textbox","id":"sh/g3q1s3up","slide":9,"text":"npm run db:migrate\nnpm run dev","textPreview":"npm run db:migrate | npm run dev","textChars":30,"textLines":2,"bbox":[810,300,330,66]}
+{"kind":"textbox","id":"sh/7eh0ved8","slide":9,"text":"Frontend","textPreview":"Frontend","textChars":8,"textLines":1,"bbox":[810,390,150,28]}
+{"kind":"textbox","id":"sh/6d8jmtcn","slide":9,"text":"npm run dev","textPreview":"npm run dev","textChars":11,"textLines":1,"bbox":[810,424,330,34]}
+{"kind":"textbox","id":"sh/w72pgv69","slide":9,"text":"Verification","textPreview":"Verification","textChars":12,"textLines":1,"bbox":[810,500,150,28]}
+{"kind":"textbox","id":"sh/x8vq907u","slide":9,"text":"npm run build\nqueue integration test","textPreview":"npm run build | queue integration test","textChars":36,"textLines":2,"bbox":[810,534,330,58]}
+{"kind":"shape","id":"sh/a5k7elo3","slide":9,"bbox":[75,605,1075,45]}
+{"kind":"textbox","id":"sh/b6t87qpo","slide":9,"text":"Runnable proof demonstrates check-in, call-next, cancellation, reconnection, and live screen refresh","textPreview":"Runnable proof demonstrates check-in, call-next, cancellation, reconnection, and live screen refresh","textChars":100,"textLines":1,"bbox":[95,612,1035,28]}
+{"kind":"notes","id":"nt/aaxxbv","slide":9,"text":"The implementation plan starts with reliable queue states, then attaches Socket.IO, defines the event contract, and updates the owner interface. The current runnable proof already demonstrates the key behavior: check-in, call-next, cancellation, automatic reconnection, and screen updates without a manual refresh. The next proposal step is to include the richer queue payload and introduce rooms for separate clinics or departments."}
+{"kind":"slide","id":"sl/tlcl1v","slide":10,"title":"10","textShapes":10}
+{"kind":"shape","id":"sh/ep0fy1sz","slide":10,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/1sby9gba","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[52,34,55,30]}
+{"kind":"textbox","id":"sh/0r2x0ba5","slide":10,"text":"Live demonstration and testing","textPreview":"Live demonstration and testing","textChars":30,"textLines":1,"bbox":[52,64,1120,60]}
+{"kind":"textbox","id":"sh/rm9g36t8","slide":10,"text":"Two browser windows show the same queue changing in real time","textPreview":"Two browser windows show the same queue changing in real time","textChars":61,"textLines":1,"bbox":[54,120,1110,34]}
+{"kind":"shape","id":"sh/ql0fu1cn","slide":10,"bbox":[52,162,1168,0]}
+{"kind":"textbox","id":"sh/dory5wbe","slide":10,"text":"PawEver queue management","textPreview":"PawEver queue management","textChars":24,"textLines":1,"bbox":[52,683,300,18]}
+{"kind":"textbox","id":"sh/snixwrut","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1180,683,40,18]}
+{"kind":"shape","id":"sh/bidgfqts","slide":10,"bbox":[65,195,545,410]}
+{"kind":"textbox","id":"sh/ahkz6ls7","slide":10,"text":"PET OWNER WINDOW","textPreview":"PET OWNER WINDOW","textChars":16,"textLines":1,"bbox":[95,218,485,30]}
+{"kind":"textbox","id":"sh/sv2pkv6h","slide":10,"text":"1  Select a registered pet\n\n2  Click Check In\n\n3  Read queue number and patients ahead\n\n4  Keep this screen open without refreshing","textPreview":"1  Select a registered pet |  | 2  Click Check In |  | 3  Read queue number and patients ahead |  | 4  Keep this screen open without refr...","textChars":131,"textLines":7,"bbox":[110,280,455,255]}
+{"kind":"shape","id":"sh/dwvqd0n2","slide":10,"bbox":[670,195,545,410]}
+{"kind":"textbox","id":"sh/qtk7ilob","slide":10,"text":"STAFF WINDOW","textPreview":"STAFF WINDOW","textChars":12,"textLines":1,"bbox":[700,218,485,30]}
+{"kind":"textbox","id":"sh/rut8bq5w","slide":10,"text":"1  Confirm the waiting entry appears\n\n2  Click Call Next Patient\n\n3  Watch the owner screen change automatically\n\n4  Test reconnection and cancellation","textPreview":"1  Confirm the waiting entry appears |  | 2  Click Call Next Patient |  | 3  Watch the owner screen change automatically |  | 4  Test rec...","textChars":151,"textLines":7,"bbox":[715,280,455,255]}
+{"kind":"shape","id":"sh/472pgb6l","slide":10,"bbox":[210,625,860,40]}
+{"kind":"textbox","id":"sh/58b69gnq","slide":10,"text":"Proof point: the owner page changes while no one presses Refresh","textPreview":"Proof point: the owner page changes while no one presses Refresh","textChars":64,"textLines":1,"bbox":[230,631,820,27]}
+{"kind":"notes","id":"nt/tlcl1v","slide":10,"text":"For the live demonstration, I will open the pet-owner and staff pages in separate windows. The owner checks in a registered pet and receives a queue number. I leave that screen open without pressing Refresh. On the staff page, I confirm the waiting entry and click Call Next Patient. The owner screen changes automatically to show the new current number and status. I can briefly disconnect and reconnect to show Socket.IO recovery, then check in another pet and cancel it. The main proof is visible: a staff action changes every connected owner screen without manual refresh."}
+{"kind":"slide","id":"sl/g094jo","slide":11,"title":"THANK YOU","textShapes":12}
+{"kind":"textbox","id":"sh/5wfm98za","slide":11,"text":"THANK YOU","textPreview":"THANK YOU","textChars":9,"textLines":1,"bbox":[100,130,1080,80]}
+{"kind":"textbox","id":"sh/it43et0j","slide":11,"text":"Real-time queue visibility for pet owners and clinic staff","textPreview":"Real-time queue visibility for pet owners and clinic staff","textChars":58,"textLines":1,"bbox":[180,235,920,46]}
+{"kind":"shape","id":"sh/3ux47y14","slide":11,"bbox":[420,318,440,0]}
+{"kind":"textbox","id":"sh/sj65k3i1","slide":11,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[263,382,62,62]}
+{"kind":"textbox","id":"sh/dkfmd8zm","slide":11,"text":"Staff action","textPreview":"Staff action","textChars":12,"textLines":1,"bbox":[155,462,278,34]}
+{"kind":"textbox","id":"sh/qho3id0v","slide":11,"text":"changes the queue","textPreview":"changes the queue","textChars":17,"textLines":1,"bbox":[155,502,278,50]}
+{"kind":"textbox","id":"sh/rix4bihg","slide":11,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[593,382,62,62]}
+{"kind":"textbox","id":"sh/8nml8jih","slide":11,"text":"Socket.IO","textPreview":"Socket.IO","textChars":9,"textLines":1,"bbox":[485,462,278,34]}
+{"kind":"textbox","id":"sh/tovm1oj2","slide":11,"text":"broadcasts the update","textPreview":"broadcasts the update","textChars":21,"textLines":1,"bbox":[485,502,278,50]}
+{"kind":"textbox","id":"sh/tgryd8jq","slide":11,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[923,382,62,62]}
+{"kind":"textbox","id":"sh/sfixknil","slide":11,"text":"Owner screen","textPreview":"Owner screen","textChars":12,"textLines":1,"bbox":[815,462,278,34]}
+{"kind":"textbox","id":"sh/7e9gbi10","slide":11,"text":"changes without refresh","textPreview":"changes without refresh","textChars":23,"textLines":1,"bbox":[815,502,278,50]}
+{"kind":"textbox","id":"sh/6dgfid0f","slide":11,"text":"Questions?","textPreview":"Questions?","textChars":10,"textLines":1,"bbox":[100,630,1080,45]}
+{"kind":"notes","id":"nt/g094jo","slide":11,"text":"To conclude, our proposal connects one staff action to every relevant pet-owner screen. The server updates the queue, Socket.IO broadcasts the change, and the owner interface changes without a refresh. This reduces uncertainty for owners and repeated questions for clinic staff. Thank you. I am happy to answer any questions."}
