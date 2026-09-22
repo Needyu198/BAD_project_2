@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1000" role="img" aria-labelledby="title desc">
+<title id="title">PawEver System Architecture</title>
+<desc id="desc">Pet owners, doctors and clinic staff use a React client application. It sends requests to a Node.js and Express API that reads and writes PostgreSQL. Appointment booking and queue check-in are separate records. Socket.IO sends queue change events to clients. The backend has a Docker deployment file.</desc>
+<defs>
+  <linearGradient id="page" x2="1" y2="1"><stop stop-color="#effff9"/><stop offset=".5" stop-color="#ffffff"/><stop offset="1" stop-color="#f0f6ff"/></linearGradient>
+  <linearGradient id="mint" x2="1" y2="1"><stop stop-color="#d9fff3"/><stop offset="1" stop-color="#a6e9d4"/></linearGradient>
+  <linearGradient id="cyan" x2="1" y2="1"><stop stop-color="#18c9d2"/><stop offset="1" stop-color="#067ca8"/></linearGradient>
+  <linearGradient id="lavender" x2="1" y2="1"><stop stop-color="#f0eaff"/><stop offset="1" stop-color="#e5f0ff"/></linearGradient>
+  <linearGradient id="peach" x2="1" y2="1"><stop stop-color="#fff0de"/><stop offset="1" stop-color="#fff9e9"/></linearGradient>
+  <filter id="glow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#0b7e74" flood-opacity=".17"/></filter>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" viewBox="0 0 10 10" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#19aa83"/></marker>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;fill:#14202a}
+    .heading{font-size:26px;font-weight:800;letter-spacing:.5px;fill:#123a44}
+    .section{font-size:21px;font-weight:800}
+    .name{font-size:21px;font-weight:700}
+    .copy{font-size:17px;font-weight:500;fill:#334155}
+    .tiny{font-size:14px;font-weight:500;fill:#40515c}
+    .arrow{stroke:#19aa83;stroke-width:5;fill:none;marker-end:url(#arrow)}
+    .divider{stroke:#8fe5cf;stroke-width:2}
+  </style>
+  <symbol id="paw" viewBox="0 0 70 70"><path d="M35 26c-11 0-14 9-23 19-5 6-3 16 5 18 7 2 10-3 18-3s11 5 18 3c8-2 10-12 5-18-9-10-12-19-23-19Z" fill="#25a874"/><ellipse cx="11" cy="23" rx="7" ry="11" transform="rotate(-25 11 23)" fill="#25a874"/><ellipse cx="27" cy="13" rx="7" ry="11" transform="rotate(-7 27 13)" fill="#25a874"/><ellipse cx="44" cy="13" rx="7" ry="11" transform="rotate(7 44 13)" fill="#25a874"/><ellipse cx="60" cy="23" rx="7" ry="11" transform="rotate(25 60 23)" fill="#25a874"/></symbol>
+  <symbol id="doctor" viewBox="0 0 70 70"><circle cx="35" cy="14" r="12" fill="#25a874"/><path d="M12 67V49c0-16 10-23 23-23s23 7 23 23v18Z" fill="#25a874"/><path d="M24 38v16c0 5 4 8 9 8m13-24v16c0 5-4 8-9 8" stroke="#eafff8" stroke-width="3" fill="none"/><circle cx="35" cy="61" r="4" fill="#eafff8"/></symbol>
+  <symbol id="staff" viewBox="0 0 70 70"><circle cx="17" cy="22" r="10" fill="#25a874"/><circle cx="53" cy="22" r="10" fill="#25a874"/><circle cx="35" cy="15" r="12" fill="#25a874"/><path d="M1 67V50c0-10 6-16 16-16 6 0 10 2 13 6-6 5-8 13-8 27Zm69 0V50c0-10-6-16-17-16-6 0-10 2-13 6 6 5 8 13 8 27Z" fill="#25a874"/><path d="M24 67V48c0-12 5-19 11-19s11 7 11 19v19Z" fill="#159369"/></symbol>
+  <symbol id="react" viewBox="0 0 75 75"><g fill="none" stroke="#0b9aca" stroke-width="3"><ellipse cx="37" cy="37" rx="32" ry="12"/><ellipse cx="37" cy="37" rx="32" ry="12" transform="rotate(60 37 37)"/><ellipse cx="37" cy="37" rx="32" ry="12" transform="rotate(120 37 37)"/></g><circle cx="37" cy="37" r="5" fill="#0b9aca"/></symbol>
+  <symbol id="node" viewBox="0 0 75 75"><path d="M37 4 68 21v34L37 72 7 55V21Z" fill="none" stroke="#20a260" stroke-width="5"/><text x="37" y="48" text-anchor="middle" font-size="26" font-family="Arial" font-weight="800" fill="#20a260">JS</text></symbol>
+  <symbol id="postgres" viewBox="0 0 90 90"><path d="M20 27c-4-18 11-23 26-17 17-7 31 1 26 21-2 11-9 18-17 20l4 21c1 7-9 10-12 3l-4-18-8 3-4 13c-2 7-13 6-12-3l4-19C15 47 12 38 20 27Z" fill="#31648b" stroke="#164974" stroke-width="3"/><path d="M27 29c2 11 10 20 19 21 10-1 16-10 18-21M40 49q4 5 10 0" fill="none" stroke="#d9f2ff" stroke-width="3"/><circle cx="33" cy="27" r="3" fill="white"/><circle cx="59" cy="27" r="3" fill="white"/></symbol>
+  <symbol id="socket" viewBox="0 0 80 80"><circle cx="40" cy="40" r="30" fill="none" stroke="#0da88e" stroke-width="5"/><path d="M47 18 29 42h14L34 63l22-29H42Z" fill="#0da88e"/></symbol>
+  <symbol id="docker" viewBox="0 0 75 75"><g fill="#168bc9"><rect x="10" y="18" width="12" height="11"/><rect x="25" y="18" width="12" height="11"/><rect x="40" y="18" width="12" height="11"/><rect x="25" y="5" width="12" height="11"/><rect x="10" y="32" width="12" height="11"/><rect x="25" y="32" width="12" height="11"/><rect x="40" y="32" width="12" height="11"/><path d="M4 47h63c-2 13-14 22-31 22C18 69 7 61 4 47Z"/></g></symbol>
+  <symbol id="wifi" viewBox="0 0 80 80"><circle cx="40" cy="40" r="9" fill="#14ac8f"/><path d="M21 20a28 28 0 0 0 0 40M59 20a28 28 0 0 1 0 40M11 10a42 42 0 0 0 0 60M69 10a42 42 0 0 1 0 60" stroke="#14ac8f" stroke-width="5" stroke-linecap="round" fill="none"/></symbol>
+</defs>
+<rect width="1800" height="1000" fill="url(#page)"/>
+<circle cx="70" cy="68" r="54" fill="#ddfff1" opacity=".65"/><circle cx="1735" cy="75" r="72" fill="#e8ecff" opacity=".65"/>
+<text x="900" y="51" text-anchor="middle" font-size="34" font-weight="800" letter-spacing="2" fill="#123a44">PAWEVER SYSTEM ARCHITECTURE</text>
+<text x="900" y="80" text-anchor="middle" font-size="17" font-weight="500" fill="#526779">How clinic users, appointments, the visit queue and records connect</text>
+<path d="M78 40H505M1295 40H1722" stroke="#38c6a7" stroke-width="2"/>
+
+<!-- Four main columns -->
+<rect x="22" y="100" width="270" height="595" rx="22" fill="#f4fffb" stroke="#2fd0a3" stroke-width="3" filter="url(#glow)"/>
+<rect x="37" y="166" width="240" height="105" rx="17" fill="#e4fbf0"/>
+<rect x="37" y="296" width="240" height="107" rx="17" fill="#e6f3ff"/>
+<rect x="37" y="429" width="240" height="108" rx="17" fill="#fff1e5"/>
+<text x="157" y="141" text-anchor="middle" class="heading">USERS</text>
+<path d="M46 155H268" class="divider"/>
+<use href="#paw" x="51" y="175" width="64" height="64"/><text x="131" y="194" class="name">Pet Owner</text><text x="131" y="222" class="copy">Book appointments</text><text x="131" y="246" class="copy">and check queue</text>
+<path d="M46 283H268" class="divider"/>
+<use href="#doctor" x="51" y="305" width="64" height="64"/><text x="131" y="325" class="name">Doctor</text><text x="131" y="353" class="copy">Consultations</text><text x="131" y="377" class="copy">and care records</text>
+<path d="M46 416H268" class="divider"/>
+<use href="#staff" x="51" y="441" width="64" height="64"/><text x="131" y="462" class="name">Clinic Staff</text><text x="131" y="490" class="copy">Manage queue</text><text x="131" y="514" class="copy">and billing</text>
+<path d="M46 551H268" class="divider"/>
+<text x="157" y="591" text-anchor="middle" class="copy">Role-based screens</text><text x="157" y="619" text-anchor="middle" class="tiny">Owner · Doctor · Staff</text>
+
+<rect x="352" y="100" width="405" height="595" rx="22" fill="#ffffff" stroke="#2fd0a3" stroke-width="3" filter="url(#glow)"/>
+<rect x="379" y="171" width="351" height="100" rx="17" fill="#e9faff"/>
+<rect x="379" y="296" width="351" height="89" rx="15" fill="#e9fbf1"/>
+<rect x="379" y="409" width="351" height="89" rx="15" fill="#edf0ff"/>
+<rect x="379" y="522" width="351" height="98" rx="15" fill="#fff3e6"/>
+<text x="554" y="141" text-anchor="middle" class="heading">CLIENT APPLICATION</text>
+<path d="M379 155H730" class="divider"/>
+<use href="#react" x="395" y="180" width="88" height="88"/><text x="503" y="213" class="name">React Portal</text><text x="503" y="242" class="copy">One app, three user views</text>
+<path d="M379 284H730" class="divider"/>
+<text x="394" y="322" class="section">Pet Owner</text><text x="394" y="350" class="copy">Pets · Appointments · Queue</text><text x="394" y="376" class="copy">Medical history</text>
+<path d="M379 397H730" class="divider"/>
+<text x="394" y="435" class="section">Doctor</text><text x="394" y="463" class="copy">Consultations · Prescriptions</text><text x="394" y="489" class="copy">Schedules · Records</text>
+<path d="M379 510H730" class="divider"/>
+<text x="394" y="548" class="section">Clinic Staff</text><text x="394" y="576" class="copy">Queue management · Billing</text><text x="394" y="602" class="copy">Reports · Activity</text>
+
+<rect x="817" y="100" width="465" height="595" rx="22" fill="#ffffff" stroke="#2fd0a3" stroke-width="3" filter="url(#glow)"/>
+<rect x="843" y="186" width="413" height="104" rx="17" fill="#effaf4"/>
+<rect x="843" y="322" width="413" height="47" rx="12" fill="#f3f0ff"/>
+<rect x="843" y="374" width="413" height="47" rx="12" fill="#eaf7ff"/>
+<rect x="843" y="426" width="413" height="47" rx="12" fill="#effbf2"/>
+<rect x="843" y="478" width="413" height="47" rx="12" fill="#fff5e5"/>
+<rect x="843" y="530" width="413" height="47" rx="12" fill="#fff0f0"/>
+<text x="1049" y="141" text-anchor="middle" class="heading">NODE.JS + EXPRESS API</text>
+<text x="1049" y="171" text-anchor="middle" class="copy">Requests · Clinic operations · Data access</text>
+<use href="#node" x="857" y="195" width="91" height="91"/><path d="M978 206v76" class="divider"/><text x="1003" y="253" font-size="37" font-weight="300">Express</text>
+<path d="M843 304H1256" class="divider"/>
+<g class="copy">
+  <circle cx="872" cy="347" r="11" fill="#13ad89"/><text x="902" y="354">Login &amp; account profiles</text>
+  <circle cx="872" cy="399" r="11" fill="#13ad89"/><text x="902" y="406">Pets &amp; appointment booking</text>
+  <circle cx="872" cy="451" r="11" fill="#13ad89"/><text x="902" y="458">Consultations &amp; medical records</text>
+  <circle cx="872" cy="503" r="11" fill="#13ad89"/><text x="902" y="510">Queue check-in &amp; call next</text>
+  <circle cx="872" cy="555" r="11" fill="#13ad89"/><text x="902" y="562">Billing, reports &amp; activity logs</text>
+</g>
+<rect x="843" y="600" width="413" height="66" rx="14" fill="url(#peach)" stroke="#f4c777" stroke-width="2"/><text x="1049" y="627" text-anchor="middle" class="tiny">APPOINTMENT TO VISIT FLOW</text><text x="1049" y="651" text-anchor="middle" class="copy">Book → Check in pet → Wait → Call next</text>
+
+<rect x="1342" y="100" width="436" height="595" rx="22" fill="#ffffff" stroke="#2fd0a3" stroke-width="3" filter="url(#glow)"/>
+<rect x="1368" y="163" width="384" height="103" rx="17" fill="#e9f4ff"/>
+<rect x="1368" y="296" width="384" height="44" rx="12" fill="#eef7ff"/>
+<rect x="1368" y="348" width="384" height="44" rx="12" fill="#effbf2"/>
+<rect x="1368" y="400" width="384" height="44" rx="12" fill="#f2edff"/>
+<rect x="1368" y="452" width="384" height="44" rx="12" fill="#fff4e7"/>
+<rect x="1368" y="504" width="384" height="44" rx="12" fill="#eafaff"/>
+<rect x="1368" y="556" width="384" height="44" rx="12" fill="#fff0f0"/>
+<text x="1560" y="141" text-anchor="middle" class="heading">POSTGRESQL</text>
+<use href="#postgres" x="1517" y="163" width="90" height="90"/>
+<path d="M1369 280H1751" class="divider"/>
+<g class="copy">
+  <circle cx="1404" cy="319" r="10" fill="#138cb6"/><text x="1430" y="327">Users &amp; profiles</text>
+  <circle cx="1404" cy="371" r="10" fill="#138cb6"/><text x="1430" y="379">Pets &amp; appointments</text>
+  <circle cx="1404" cy="423" r="10" fill="#138cb6"/><text x="1430" y="431">Medical &amp; care records</text>
+  <circle cx="1404" cy="475" r="10" fill="#138cb6"/><text x="1430" y="483">Queue entries</text>
+  <circle cx="1404" cy="527" r="10" fill="#138cb6"/><text x="1430" y="535">Billing &amp; reports</text>
+  <circle cx="1404" cy="579" r="10" fill="#138cb6"/><text x="1430" y="587">Activity logs</text>
+</g>
+<rect x="1368" y="620" width="384" height="48" rx="12" fill="#eafaf7"/><text x="1560" y="649" text-anchor="middle" class="tiny">Queue links to pet + owner, not appointment</text>
+
+<!-- Main arrows and labels -->
+<path d="M292 348H352" class="arrow"/><rect x="297" y="295" width="50" height="37" rx="18" fill="white" stroke="#7edbc0"/><text x="322" y="319" text-anchor="middle" class="tiny">roles</text>
+<path d="M757 348H817" class="arrow"/><rect x="765" y="295" width="43" height="37" rx="18" fill="white" stroke="#7edbc0"/><text x="786" y="319" text-anchor="middle" class="tiny">API</text>
+<path d="M1282 348H1342" class="arrow"/><rect x="1285" y="295" width="50" height="37" rx="18" fill="white" stroke="#7edbc0"/><text x="1310" y="319" text-anchor="middle" class="tiny">data</text>
+
+<!-- Real time and deployment -->
+<rect x="566" y="732" width="716" height="160" rx="22" fill="url(#mint)" stroke="#2fd0a3" stroke-width="3" filter="url(#glow)"/>
+<use href="#wifi" x="596" y="779" width="82" height="82"/><text x="697" y="776" class="heading">REAL-TIME QUEUE UPDATES</text><text x="697" y="811" class="copy">Socket.IO signals check-in, next call &amp; cancellation</text><text x="697" y="841" class="copy">Owner and staff portals reload the latest queue</text><text x="697" y="871" class="tiny">Queue state is stored in PostgreSQL</text>
+<path d="M554 695v84h12" class="arrow"/><path d="M1049 695v37" class="arrow"/>
+
+<rect x="1342" y="732" width="436" height="160" rx="22" fill="url(#lavender)" stroke="#80a4ec" stroke-width="3" filter="url(#glow)"/>
+<text x="1560" y="777" text-anchor="middle" class="heading">DEPLOYMENT</text><use href="#docker" x="1390" y="793" width="76" height="76"/><text x="1490" y="824" class="name">Backend Dockerfile</text><text x="1490" y="853" class="copy">Runs API + database migrations</text>
+<path d="M1560 695v37" class="arrow"/>
+
+<!-- Stack footer -->
+<rect x="22" y="927" width="1756" height="51" rx="16" fill="#f7fffc" stroke="#2fd0a3" stroke-width="2"/>
+<text x="93" y="960" class="section">TECH STACK</text><path d="M248 937v31" class="divider"/>
+<use href="#react" x="300" y="932" width="41" height="41"/><text x="351" y="961" class="name">React</text>
+<use href="#node" x="481" y="932" width="41" height="41"/><text x="532" y="961" class="name">Node.js</text>
+<text x="670" y="961" class="name">Express</text>
+<use href="#postgres" x="814" y="930" width="48" height="48"/><text x="871" y="961" class="name">PostgreSQL</text>
+<use href="#socket" x="1081" y="932" width="41" height="41"/><text x="1132" y="961" class="name">Socket.IO</text>
+<use href="#docker" x="1328" y="932" width="41" height="41"/><text x="1379" y="961" class="name">Docker</text>
+<text x="1537" y="961" class="name">Vite</text>
+</svg>
