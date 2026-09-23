@@ -67,9 +67,15 @@ Important distinction for an explanation: WebSocket is the low-level, full-duple
 
 For multiple backend server instances, replace the in-memory Socket.IO room broadcast with the Socket.IO Redis adapter so an event created on one instance reaches clients connected to every instance.
 
+## Daily reset
+
+Queue numbers restart at **A001** at the start of each local day. A "day" is the calendar date of an entry's `created_at` in the `QUEUE_TIMEZONE` zone (defaults to `Asia/Seoul`; set it in `Backend/.env`). At local midnight the next check-in becomes A001 again, and the previous day's numbers are frozen as history. The queue page reflects this automatically: connected clients receive the periodic safety refresh and any `queue:updated` event, so the first check-in after midnight shows A001 without a manual reload.
+
+No scheduled job or database reset is required. Numbering is derived per day from each entry's local creation date, so history is preserved and nothing is deleted. Calling the next patient and the "patients ahead" count are scoped to the current day, so a `WAITING` entry left uncalled from a previous day is never pulled into or counted against the new day. If a patient was still `SERVING` when the day rolled over, it is no longer shown as the current patient on the new day and is completed the next time staff calls the next patient.
+
 ## Exact manual test
 
-Use a fresh queue table in a development database to obtain literal A001 and A002. Existing queue history is deliberately retained; numbers continue from the last issued number. Do not reset a database containing real clinic data.
+Use a fresh queue table in a development database, and run the test within a single local day, to obtain literal A001 and A002. Within a day, numbers increase from the first check-in; they restart at A001 on the next local day. Do not reset a database containing real clinic data.
 
 1. Sign in as a pet owner. In **My Pets**, register two pets, for example Milo and Coco, if needed.
 2. Open **Queue Status**, select Milo, and click **Check In**. Verify **A001**, **WAITING**, and **0** patients ahead.
@@ -98,7 +104,7 @@ All endpoints require `?userId=<existing-user-id>`, following the project's exis
 
 Each entry includes `id`, `queueNumber`, `ownerId`, `petId`, `ownerName`, `petName`, `status`, `patientsAhead`, `createdAt`, `calledAt`, and `completedAt`.
 
-Numbers are database-generated, monotonically increasing, and never reset daily. They start at A001 and expand beyond A999. Database identities may have gaps after rolled-back inserts. A transaction-wide advisory lock serializes check-ins, next calls, and cancellations; partial unique indexes enforce one SERVING patient and one active entry per pet. Each accepted next request advances one patient, so two simultaneous staff calls advance twice in sequence while retaining only one SERVING row. The UI disables actions during an in-flight action to prevent double clicks.
+Numbers restart at A001 each local day (see [Daily reset](#daily-reset)). Within a day they are derived from the database-generated, monotonically increasing `ticket_number`, so they are ordered and stable. The underlying `ticket_number` never resets and remains the global history key; only the displayed per-day `queueNumber` restarts. Database identities may have gaps after rolled-back inserts, but the per-day display rank is contiguous (A001, A002, …). A transaction-wide advisory lock serializes check-ins, next calls, and cancellations; partial unique indexes enforce one SERVING patient and one active entry per pet. Each accepted next request advances one patient, so two simultaneous staff calls advance twice in sequence while retaining only one SERVING row. The UI disables actions during an in-flight action to prevent double clicks.
 
 ## Automated verification
 

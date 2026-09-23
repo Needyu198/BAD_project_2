@@ -1,5 +1,15 @@
 import { pool } from '../config/db.js'
 
+// Local timezone that defines when the queue "day" rolls over. Queue numbers
+// restart at A001 at local midnight in this zone. Defaults to the clinic's
+// deployment region (Korea) but is overridable via QUEUE_TIMEZONE.
+const QUEUE_TIMEZONE = process.env.QUEUE_TIMEZONE || 'Asia/Seoul'
+
+// The local calendar date of an entry's creation timestamp. Two entries share a
+// "queue day" when this expression matches, which is what makes numbering reset.
+const localDay = `(q.created_at AT TIME ZONE '${QUEUE_TIMEZONE}')::date`
+const localToday = `(clock_timestamp() AT TIME ZONE '${QUEUE_TIMEZONE}')::date`
+
 // All queue mutations share a transaction lock, including check-in ordering.
 // The partial unique index also enforces one SERVING row at database level.
 async function mutate(callback) {
@@ -22,14 +32,27 @@ function fail(status, message) {
   throw Object.assign(new Error(message), { status })
 }
 
+// queueNumber is a per-day rank: entries are numbered A001, A002, ... within
+// their own local calendar day (ordered by ticket_number), so each new day the
+// count starts over at A001. ticket_number remains the global, monotonic tie
+// breaker and history key. patientsAhead only counts WAITING entries from the
+// same day that are earlier in line.
 const selectQueue = `
-  SELECT q.ticket_number AS "_order", q.id, 'A' || LPAD(q.ticket_number::text, GREATEST(3, LENGTH(q.ticket_number::text)), '0') AS "queueNumber",
+  SELECT q.ticket_number AS "_order",
+    ${localDay} AS "_day",
+    q.id,
+    'A' || LPAD(
+      ROW_NUMBER() OVER (PARTITION BY ${localDay} ORDER BY q.ticket_number)::text,
+      3, '0'
+    ) AS "queueNumber",
     q.owner_id AS "ownerId", q.pet_id AS "petId",
     COALESCE(u.name, 'Deleted owner') AS "ownerName", COALESCE(p.name, 'Deleted pet') AS "petName",
     q.status, q.created_at AS "createdAt", q.called_at AS "calledAt", q.completed_at AS "completedAt",
     CASE WHEN q.status = 'WAITING' THEN
       (SELECT COUNT(*)::int FROM queue_entries ahead
-       WHERE ahead.status = 'WAITING' AND ahead.ticket_number < q.ticket_number)
+       WHERE ahead.status = 'WAITING'
+         AND ahead.ticket_number < q.ticket_number
+         AND (ahead.created_at AT TIME ZONE '${QUEUE_TIMEZONE}')::date = ${localDay})
       ELSE 0 END AS "patientsAhead"
   FROM queue_entries q
   LEFT JOIN users u ON u.id = q.owner_id
@@ -38,12 +61,15 @@ const selectQueue = `
 export const Queue = {
   async snapshot(ownerId = null, id = null) {
     // One SQL statement keeps current, queue statuses, and counts consistent.
+    // The serving entry is only surfaced as "current" when it belongs to today,
+    // so a stale SERVING row from a previous day never shows on the new day.
     const { rows } = await pool.query(`
       WITH entries AS (${selectQueue})
-      SELECT COALESCE((SELECT json_agg(to_jsonb(e) - '_order' ORDER BY e."_order") FROM entries e
+      SELECT COALESCE((SELECT json_agg(to_jsonb(e) - '_order' - '_day' ORDER BY e."_order") FROM entries e
         WHERE ($1::text IS NULL OR e."ownerId" = $1)
           AND ($2::text IS NULL OR e.id = $2)), '[]'::json) AS queue,
-        (SELECT to_jsonb(e) - '_order' FROM entries e WHERE e.status = 'SERVING') AS current`, [ownerId, id])
+        (SELECT to_jsonb(e) - '_order' - '_day' FROM entries e
+          WHERE e.status = 'SERVING' AND e."_day" = ${localToday}) AS current`, [ownerId, id])
     return rows[0]
   },
 
@@ -60,9 +86,17 @@ export const Queue = {
 
   next() {
     return mutate(async (client) => {
+      // Complete the patient currently being served (any day) so the single
+      // SERVING slot is freed, then call the next WAITING patient from today
+      // only. Uncalled WAITING entries left over from a previous day are not
+      // pulled into the new day.
       await client.query("UPDATE queue_entries SET status = 'COMPLETED', completed_at = clock_timestamp() WHERE status = 'SERVING'")
       const { rows } = await client.query(`UPDATE queue_entries SET status = 'SERVING', called_at = clock_timestamp()
-        WHERE id = (SELECT id FROM queue_entries WHERE status = 'WAITING' ORDER BY ticket_number LIMIT 1)
+        WHERE id = (
+          SELECT id FROM queue_entries
+          WHERE status = 'WAITING'
+            AND (created_at AT TIME ZONE '${QUEUE_TIMEZONE}')::date = ${localToday}
+          ORDER BY ticket_number LIMIT 1)
         RETURNING id`)
       return rows[0]?.id || null
     })
